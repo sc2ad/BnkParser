@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,19 @@ namespace BankParser
 {
     class DATAData : Parsable
     {
-        byte[] header;
-        UInt32 size;
-        byte[] data;
-
+        [JsonIgnore]
+        public byte[] header;
+        public string headerName;
+        public UInt32 size;
+        [JsonIgnore]
+        public byte[] data;
+        [JsonIgnore]
         public long Size => size + 8;
 
         public void Read(CustomBinaryReader reader)
         {
             header = reader.ReadBytes(4);
+            headerName = Encoding.UTF8.GetString(header);
             size = reader.ReadUInt32();
             data = reader.ReadBytes((int)size);
         }
