@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AssetParser.PistolWhipAssets
 {
-    public class ObstacleData : MonoBehaviourObject, INeedAssetsMetadata
+    public class ObstacleData : MonoBehaviourObject
     {
         public Placement Placement { get; set; }
         public ObstacleType ObstacleType { get; set; }

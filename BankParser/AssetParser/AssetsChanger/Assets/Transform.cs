@@ -26,14 +26,8 @@ namespace AssetParser.AssetsChanger.Assets
             Parse(reader);
         }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            ParseBase(reader);
-        }
-
-        protected override void ParseBase(AssetsReader reader)
-        {
-            base.ParseBase(reader);
             LocalRotation = new QuaternionF(reader);
             LocalPosition = new Vector3F(reader);
             LocalScale = new Vector3F(reader);
@@ -43,7 +37,6 @@ namespace AssetParser.AssetsChanger.Assets
 
         protected override void WriteObject(AssetsWriter writer)
         {
-            base.WriteBase(writer);
             LocalRotation.Write(writer);
             LocalPosition.Write(writer);
             LocalScale.Write(writer);

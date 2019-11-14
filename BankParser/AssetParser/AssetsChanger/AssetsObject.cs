@@ -37,7 +37,7 @@ namespace AssetParser.AssetsChanger
             ObjectInfo = objectInfo;
         }
 
-        public AssetsObject(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseObject)
+        public AssetsObject(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseObject = false)
         {
             ObjectInfo = objectInfo;
             if (parseObject)

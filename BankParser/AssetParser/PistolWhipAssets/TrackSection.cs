@@ -61,6 +61,7 @@ namespace AssetParser.PistolWhipAssets
             reader.AlignTo(4);
             exposure = reader.ReadSingle();
             startingWall = reader.ReadBoolean();
+            reader.AlignTo(4);
             endingWall = reader.ReadBoolean();
             reader.AlignTo(4);
             height = reader.ReadInt32();

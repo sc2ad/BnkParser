@@ -20,9 +20,8 @@ namespace AssetParser.AssetsChanger.Assets
         public Texture2DObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.Texture2DClassID)
         { }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             Name = reader.ReadString();
             ForcedFallbackFormat = reader.ReadInt32();
             DownscaleFallback = reader.ReadBoolean();
@@ -48,7 +47,6 @@ namespace AssetParser.AssetsChanger.Assets
         }
         protected override void WriteObject(AssetsWriter writer)
         {
-            base.WriteBase(writer);
             writer.Write(Name);
             writer.Write(ForcedFallbackFormat);
             writer.Write(DownscaleFallback);

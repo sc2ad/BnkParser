@@ -18,9 +18,8 @@ namespace AssetParser.AssetsChanger.Assets
             Parse(reader);
         }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             Name = reader.ReadString();
             ExecutionOrder = reader.ReadInt32();
             PropertiesHash = reader.ReadGuid();
@@ -38,11 +37,6 @@ namespace AssetParser.AssetsChanger.Assets
             writer.Write(ClassName);
             writer.Write(Namespace);
             writer.Write(AssemblyName);
-        }
-
-        protected override void WriteObject(AssetsWriter writer)
-        {
-            WriteBase(writer);
         }
 
         public string Name { get; set; }

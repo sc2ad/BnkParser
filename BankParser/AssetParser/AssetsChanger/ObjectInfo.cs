@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AssetParser.Utils.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -88,8 +89,10 @@ namespace AssetParser.AssetsChanger.Assets
             }
             return (T)newObj;
         }
-
-        private ObjectInfo()
+        /// <summary>
+        /// DANGER!
+        /// </summary>
+        internal ObjectInfo()
         { }
 
         private ObjectInfo(Int64 objectID, Int32 dataOffset, Int32 dataSize, Int32 typeIndex, AssetsFile parentFile, T assetsObject)
@@ -225,7 +228,7 @@ namespace AssetParser.AssetsChanger.Assets
             {
                 using (var reader = ParentFile.GetReaderAtDataOffset())
                 {
-                    return new AssetsObject(this, reader);
+                    return new AssetsObject(this, reader, false);
                 }
             }
         }
@@ -236,7 +239,14 @@ namespace AssetParser.AssetsChanger.Assets
             {
                 using (var reader = ParentFile.GetReaderAtDataOffset())
                 {
-                    _object = (T)Activator.CreateInstance(typeof(T), this, reader);
+                    try
+                    {
+                        _object = (T)Activator.CreateInstance(typeof(T), this, reader);
+                    } catch (System.MissingMethodException)
+                    {
+                        // Try with bool param
+                        _object = (T)Activator.CreateInstance(typeof(T), this, reader, false);
+                    }
                 }
             }
         }

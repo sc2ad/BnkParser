@@ -17,7 +17,7 @@ namespace AssetParser.PistolWhipAssets
         public bool IgnoreLatencyOffset { get; set; }
         // Align4
         List<TempoSectionDef> TempoSections { get; set; }
-        List<ISmartPtr<KoreographyTrackBase>> Tracks { get; set; }
+        List<SmartPtr<KoreographyTrackBase>> Tracks { get; set; }
 
         public Koreography(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
@@ -33,8 +33,8 @@ namespace AssetParser.PistolWhipAssets
             SampleRate = reader.ReadInt32();
             IgnoreLatencyOffset = reader.ReadBoolean();
             reader.AlignTo(4);
-            TempoSections = reader.ReadArrayOf((r) => new TempoSectionDef(r));
-            Tracks = reader.ReadArrayOf((r) => (ISmartPtr<KoreographyTrackBase>)SmartPtr<KoreographyTrackBase>.Read(ObjectInfo.ParentFile, this, r));
+            TempoSections = reader.ReadArrayOf((r) => new TempoSectionDef(ObjectInfo, r, true));
+            Tracks = reader.ReadArrayOf((r) => SmartPtr<KoreographyTrackBase>.Read(ObjectInfo.ParentFile, this, r));
         }
 
         protected override void WriteObject(AssetsWriter writer)

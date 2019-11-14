@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace AssetParser.PistolWhipAssets
         public float playerSpeed { get; set; }
         public string songName { get; set; }
         public Single songLength { get; set; }
+        [JsonIgnore]
         public byte[] sectionData { get; set; }
 
         public LevelData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)

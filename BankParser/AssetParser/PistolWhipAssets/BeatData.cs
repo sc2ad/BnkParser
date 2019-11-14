@@ -15,8 +15,6 @@ namespace AssetParser.PistolWhipAssets
         List<TargetData> targets { get; set; }
         List<ObstacleData> obstacles { get; set; }
 
-        private AssetsFile file;
-        private AssetsObject owner;
         public BeatData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

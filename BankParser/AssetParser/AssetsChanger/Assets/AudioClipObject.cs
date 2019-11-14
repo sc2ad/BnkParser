@@ -45,9 +45,8 @@ namespace AssetParser.AssetsChanger.Assets
         public AudioClipObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.AudioClipClassID)
         { }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             Name = reader.ReadString();
             LoadType = reader.ReadInt32();
             Channels = reader.ReadInt32();
@@ -67,7 +66,6 @@ namespace AssetParser.AssetsChanger.Assets
         }
         protected override void WriteObject(AssetsWriter writer)
         {
-            base.WriteBase(writer);
             writer.Write(Name);
             writer.Write(LoadType);
             writer.Write(Channels);

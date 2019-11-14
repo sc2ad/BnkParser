@@ -21,23 +21,16 @@ namespace AssetParser.AssetsChanger.Assets
             Parse(reader);
         }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             Name = reader.ReadString();
             Script = reader.ReadString();
         }
 
-        protected override void WriteBase(AssetsWriter writer)
-        {
-            base.WriteBase(writer);
-            writer.Write(Name);
-            writer.Write(Script);
-        }
-
         protected override void WriteObject(AssetsWriter writer)
         {
-            WriteBase(writer);
+            writer.Write(Name);
+            writer.Write(Script);
         }
 
         [System.ComponentModel.Browsable(false)]

@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger.Assets;
 using AssetParser.Utils;
+using AssetParser.Utils.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace AssetParser.AssetsChanger
                 Header = new AssetsFileHeader(reader);
             }
 
-            if (Header.MetadataSize > Header.FileSize || Header.ObjectDataOffset < Header.MetadataSize || Header.Version != 17)
+            if (Header.MetadataSize > Header.FileSize || Header.ObjectDataOffset < Header.MetadataSize || (Header.Version != 17 && Header.Version != 20))
                 throw new NotSupportedException($"{AssetsFilename} doesn't appear to be a valid assets file, or {Header.Version} is unsupported!");
 
             if (loadData)
@@ -161,7 +162,7 @@ namespace AssetParser.AssetsChanger
                 //attempt to add a type reference.  Not sure the implications of this, e.g. circular references or something
                 Log.LogMsg($"Attempting to add type to file {AssetsFilename} likely as part of a clone...");
                 toFileType = type.CloneWithoutTypeTree();
-                this.Metadata.Types.Add(toFileType);
+                Metadata.Types.Add(toFileType);
             }
             return Metadata.Types.IndexOf(toFileType);
         }

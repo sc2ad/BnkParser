@@ -24,9 +24,8 @@ namespace AssetParser.AssetsChanger.Assets
         { IsActive = true; }
 
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             int count = reader.ReadInt32();
             for (int i = 0; i < count; i++)
                 Components.Add(SmartPtr<AssetsObject>.Read(ObjectInfo.ParentFile, this, reader));
@@ -46,11 +45,6 @@ namespace AssetParser.AssetsChanger.Assets
             writer.Write(Name);
             writer.Write(Tag);
             writer.Write(IsActive);
-        }
-
-        protected override void WriteObject(AssetsWriter writer)
-        {
-            WriteBase(writer);
         }
 
         public List<ISmartPtr<AssetsObject>> Components { get; set; } = new List<ISmartPtr<AssetsObject>>();

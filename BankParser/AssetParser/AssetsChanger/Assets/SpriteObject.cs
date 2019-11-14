@@ -20,9 +20,8 @@ namespace AssetParser.AssetsChanger
             Parse(reader);
         }
 
-        public override void Parse(AssetsReader reader)
+        public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             Name = reader.ReadString();
             Rect = new RectF(reader);
             Offset = new Vector2F(reader);
@@ -59,11 +58,6 @@ namespace AssetParser.AssetsChanger
             RenderData.Write(writer);
             writer.WriteArrayOf(PhysicsShape, (o, w) => w.WriteArrayOf(o, (o2, w2) => o2.Write(w2)));
             writer.WriteArrayOf(Bones, (o, w) => o.Write(w));
-        }
-
-        protected override void WriteObject(AssetsWriter writer)
-        {
-            WriteBase(writer);
         }
 
         public string Name { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AssetParser.PistolWhipAssets
 {
-    class KoreographyTrackBase : MonoBehaviourObject, INeedAssetsMetadata
+    public class KoreographyTrackBase : MonoBehaviourObject, INeedAssetsMetadata
     {
         public string EventID { get; set; }
         public List<KoreographyEvent> EventList { get; set; }
@@ -21,6 +21,10 @@ namespace AssetParser.PistolWhipAssets
 
         public KoreographyTrackBase(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("KoreographyTrackBase"))
         { }
+
+        public KoreographyTrackBase(AssetsFile assetsFile, MonoScriptObject scriptObject) : base(assetsFile, scriptObject)
+        {
+        }
 
         public override void ParseObject(AssetsReader reader)
         {

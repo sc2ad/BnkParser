@@ -1,4 +1,6 @@
 ﻿using AssetParser.AssetsChanger.Assets;
+using AssetParser.Utils.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,15 @@ namespace AssetParser.AssetsChanger
 {
     public interface ISmartPtr<out T> where T : AssetsObject
     {
+        [JsonIgnore]
         AssetsObject Owner { get; }
+        [JsonIgnore]
         IObjectInfo<T> Target { get; }
         void Dispose();
         void WritePtr(AssetsWriter writer);
+        [JsonIgnore]
         bool IsNew { get; set; }
+        [JsonIgnore]
         T Object { get; }
         int FileID { get; }
         long PathID { get; }
@@ -29,6 +35,12 @@ namespace AssetParser.AssetsChanger
         public SmartPtr(AssetsObject owner, IObjectInfo<T> target)
         {
             Init(owner, target);
+        }
+
+        private bool isNull = false;
+        private SmartPtr()
+        {
+            isNull = true;
         }
 
         private void Init(AssetsObject owner, IObjectInfo<T> target)
@@ -49,6 +61,7 @@ namespace AssetParser.AssetsChanger
             }
         }
 
+
         public static SmartPtr<T> Read(AssetsFile assetsFile, AssetsObject owner, AssetsReader reader)
         {
             if (owner == null)
@@ -59,7 +72,7 @@ namespace AssetParser.AssetsChanger
             reader.AlignTo(4);
             Int64 pathID = reader.ReadInt64();
             if (fileID == 0 && pathID == 0)
-                return null;
+                return new SmartPtr<T>();
 
             var objInfo = assetsFile.GetObjectInfo<T>(fileID, pathID);
 
@@ -110,6 +123,8 @@ namespace AssetParser.AssetsChanger
         {
             get
             {
+                if (isNull)
+                    return 0;
                 if (Target == null)
                     throw new Exception("Target is null!");
                 return Target.ObjectID;
@@ -120,6 +135,8 @@ namespace AssetParser.AssetsChanger
         {
             get
             {
+                if (isNull)
+                    return 0;
                 if (Owner == null)
                     throw new NotSupportedException("SmartPtr doesn't have an owner, getting FileID isn't supported!");
                 if (Owner.ObjectInfo.ParentFile == Target.ParentFile)
@@ -176,6 +193,12 @@ namespace AssetParser.AssetsChanger
 
         public void WritePtr(AssetsWriter writer)
         {
+            if (isNull)
+            {
+                byte[] buf = new byte[12];
+                writer.Write(buf);
+                return;
+            }
             writer.Write(FileID);
             writer.AlignTo(4);
             writer.Write(Target.ObjectID);

@@ -90,6 +90,11 @@ namespace AssetParser.AssetsChanger
             BaseStream.Seek(_startPosition + offset, SeekOrigin.Begin);
         }
 
+        public override bool ReadBoolean()
+        {
+            return base.ReadByte() != 0;
+        }
+
         //public int ObjectDataPosition
         //{
         //    get { return Position - ObjectDataOffset; }
