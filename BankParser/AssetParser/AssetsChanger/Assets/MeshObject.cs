@@ -19,7 +19,6 @@ namespace AssetParser.AssetsChanger.Assets
 
         public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
             int startPosition = reader.Position;
             Name = reader.ReadString();
             //int readLen = ObjectInfo.DataSize - (reader.Position - startPosition);
@@ -52,7 +51,6 @@ namespace AssetParser.AssetsChanger.Assets
 
         protected override void WriteObject(AssetsWriter writer)
         {
-            base.WriteBase(writer);
             writer.Write(Name);
             //writer.Write(MeshData);
             writer.WriteArrayOf(SubMeshes, (o, w) => o.Write(w));

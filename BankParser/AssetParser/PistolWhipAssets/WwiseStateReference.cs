@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace AssetParser.PistolWhipAssets
 {
-    public class WwiseStateReference : MonoBehaviourObject, INeedAssetsMetadata
+    public class WwiseStateReference : WwiseGroupValueObjectReference, INeedAssetsMetadata
     {
-        byte[] unknown;
+        public SmartPtr<WwiseStateGroupReference> WwiseStateGroupReference { get; set; }
 
         public WwiseStateReference(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
@@ -22,12 +22,14 @@ namespace AssetParser.PistolWhipAssets
 
         public override void ParseObject(AssetsReader reader)
         {
-            unknown = reader.ReadBytes(ObjectInfo.DataSize - (reader.Position - ObjectInfo.DataOffset));
+            base.ParseObject(reader);
+            WwiseStateGroupReference = SmartPtr<WwiseStateGroupReference>.Read(ObjectInfo.ParentFile, this, reader);
         }
 
         protected override void WriteObject(AssetsWriter writer)
         {
-            writer.Write(unknown);
+            base.WriteObject(writer);
+            WwiseStateGroupReference.WritePtr(writer);
         }
     }
 }

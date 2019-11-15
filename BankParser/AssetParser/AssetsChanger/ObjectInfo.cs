@@ -176,6 +176,18 @@ namespace AssetParser.AssetsChanger.Assets
                 case AssetsConstants.ClassID.Texture2DClassID:
                     type = typeof(Texture2DObject);
                     break;
+                case AssetsConstants.ClassID.MaterialClassID:
+                    type = typeof(MaterialObject);
+                    break;
+                case AssetsConstants.ClassID.MeshAssetClassID:
+                    type = typeof(MeshObject);
+                    break;
+                case AssetsConstants.ClassID.MeshRendererClassID:
+                    type = typeof(MeshRendererObject);
+                    break;
+                case AssetsConstants.ClassID.SkinnedMeshRenderer:
+                    type = typeof(SkinnedMeshRenderer);
+                    break;
                 case AssetsConstants.ClassID.GameObjectClassID:
                     type = typeof(GameObject);
                     break;

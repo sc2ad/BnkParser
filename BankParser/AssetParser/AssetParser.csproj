@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -118,6 +120,8 @@
     <Compile Include="PistolWhipAssets\CullingRange.cs" />
     <Compile Include="PistolWhipAssets\CurvePayload.cs" />
     <Compile Include="PistolWhipAssets\Debris.cs" />
+    <Compile Include="PistolWhipAssets\Decoration.cs" />
+    <Compile Include="PistolWhipAssets\DecorationSet.cs" />
     <Compile Include="PistolWhipAssets\Enemy.cs" />
     <Compile Include="PistolWhipAssets\EnemyAction.cs" />
     <Compile Include="PistolWhipAssets\EnemyMovement.cs" />
@@ -127,10 +131,14 @@
     <Compile Include="PistolWhipAssets\GeoSet.cs" />
     <Compile Include="PistolWhipAssets\Gradient.cs" />
     <Compile Include="PistolWhipAssets\GradientPayload.cs" />
+    <Compile Include="PistolWhipAssets\GroundDecorator.cs" />
     <Compile Include="PistolWhipAssets\IntPayload.cs" />
     <Compile Include="PistolWhipAssets\KoreographyTrack.cs" />
+    <Compile Include="PistolWhipAssets\LevelAssetDatabase.cs" />
     <Compile Include="PistolWhipAssets\LevelData.cs" />
     <Compile Include="AssetsChanger\Assets\Renderer.cs" />
+    <Compile Include="PistolWhipAssets\LevelDatabase.cs" />
+    <Compile Include="PistolWhipAssets\LevelDecoratorBase.cs" />
     <Compile Include="PistolWhipAssets\OscillatingObjectData.cs" />
     <Compile Include="PistolWhipAssets\SpectrumPayload.cs" />
     <Compile Include="PistolWhipAssets\TargetData.cs" />
@@ -144,9 +152,15 @@
     <Compile Include="PistolWhipAssets\TextPayload.cs" />
     <Compile Include="PistolWhipAssets\TrackData.cs" />
     <Compile Include="PistolWhipAssets\TrackSection.cs" />
+    <Compile Include="PistolWhipAssets\WallDecorator.cs" />
     <Compile Include="PistolWhipAssets\WorldObject.cs" />
     <Compile Include="PistolWhipAssets\WorldPoint.cs" />
     <Compile Include="PistolWhipAssets\WorldRegion.cs" />
+    <Compile Include="PistolWhipAssets\WwiseGroupValueObjectReference.cs" />
+    <Compile Include="PistolWhipAssets\WwiseKoreographySet.cs" />
+    <Compile Include="PistolWhipAssets\WwiseKoreoMediaIDEntry.cs" />
+    <Compile Include="PistolWhipAssets\WwiseObjectReference.cs" />
+    <Compile Include="PistolWhipAssets\WwiseStateGroupReference.cs" />
     <Compile Include="PistolWhipAssets\WwiseStateReference.cs" />
     <Compile Include="PistolWhipConfig.cs" />
     <Compile Include="PistolWhipConst.cs" />

@@ -21,7 +21,7 @@ namespace AssetParser.AssetsChanger.Assets
         public List<string> DisabledShaderPasses { get; set; } = new List<string>();
         public PropertySheet SavedProperties { get; set; }
 
-        public MaterialObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.MeshFilterClassID)
+        public MaterialObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.MaterialClassID)
         {
         }
 
@@ -31,7 +31,7 @@ namespace AssetParser.AssetsChanger.Assets
 
         public override void ParseObject(AssetsReader reader)
         {
-            base.ParseBase(reader);
+            //base.ParseBase(reader);
             Name = reader.ReadString();
             Shader = SmartPtr<AssetsObject>.Read(this.ObjectInfo.ParentFile, this, reader);
             ShaderKeywords = reader.ReadString();
@@ -47,7 +47,7 @@ namespace AssetParser.AssetsChanger.Assets
 
         protected override void WriteObject(AssetsWriter writer)
         {
-            base.WriteBase(writer);
+            //base.WriteBase(writer);
             writer.Write(Name);
             Shader.Write(writer);
             writer.Write(ShaderKeywords);

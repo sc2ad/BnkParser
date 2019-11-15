@@ -1,4 +1,5 @@
 ﻿using AssetParser.AssetsChanger.Assets;
+using AssetParser.AssetsChanger.Interfaces;
 using AssetParser.Utils.Logging;
 using Newtonsoft.Json;
 using System;
@@ -23,10 +24,42 @@ namespace AssetParser.AssetsChanger
         T Object { get; }
         int FileID { get; }
         long PathID { get; }
+        string TargetName { get; }
+        string TargetType { get; }
     }
 
     public class SmartPtr<T> : ISmartPtr<T>, IDisposable where T : AssetsObject
     {
+        public string TargetName
+        {
+            get
+            {
+                if (isNull || Target == null || Target.Object == null || Target.Object as IHaveName == null) return "";
+                try
+                {
+                    return (Target.Object as IHaveName).Name;
+                }
+                catch (Exception)
+                {
+                    return "FAILED_TO_PARSE";
+                }
+            }
+        }
+        public string TargetType
+        {
+            get
+            {
+                if (isNull || Target == null || Target.Object == null) return "";
+                try
+                {
+                    return Target.Object.GetType().Name;
+                }
+                catch (Exception)
+                {
+                    return "FAILED_TO_PARSE";
+                }
+            }
+        }
         public SmartPtr(AssetsObject owner, T target)
         {
             Init(owner, (IObjectInfo<T>)target.ObjectInfo);

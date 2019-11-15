@@ -11,8 +11,8 @@ namespace AssetParser.PistolWhipAssets
 {
     public class ObstacleData : MonoBehaviourObject
     {
-        public Placement Placement { get; set; }
-        public ObstacleType ObstacleType { get; set; }
+        public Placement placement { get; set; }
+        public ObstacleType obstacleType { get; set; }
 
         public ObstacleData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
@@ -23,14 +23,14 @@ namespace AssetParser.PistolWhipAssets
 
         public override void ParseObject(AssetsReader reader)
         {
-            Placement = reader.ReadEnum<Placement>();
-            ObstacleType = reader.ReadEnum<ObstacleType>();
+            placement = reader.ReadEnum<Placement>();
+            obstacleType = reader.ReadEnum<ObstacleType>();
         }
 
         protected override void WriteObject(AssetsWriter writer)
         {
-            writer.Write((int)Placement);
-            writer.Write((int)ObstacleType);
+            writer.Write((int)placement);
+            writer.Write((int)obstacleType);
         }
     }
 

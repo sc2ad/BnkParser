@@ -179,4 +179,26 @@ namespace AssetParser.AssetsChanger.Assets
             writer.Write(W);
         }
     }
+
+    public class Bounds
+    {
+        public Vector3F center { get; set; }
+        public Vector3F size { get; set; }
+
+        public Bounds() { }
+        public Bounds(AssetsReader reader)
+        {
+            Parse(reader);
+        }
+        private void Parse(AssetsReader reader)
+        {
+            center = new Vector3F(reader);
+            size = new Vector3F(reader);
+        }
+        public void Write(AssetsWriter writer)
+        {
+            center.Write(writer);
+            size.Write(writer);
+        }
+    }
 }
