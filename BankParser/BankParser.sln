@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankParser", "BankParser\Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetParser", "AssetParser\AssetParser.csproj", "{0869ED96-CF9B-4078-BC7C-AF1F25022CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomSongsLoader", "CustomSongsLoader\CustomSongsLoader.csproj", "{3EF62711-6313-4318-943E-12ACF2FB8CEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomSongsLoader", "CustomSongsLoader\CustomSongsLoader.csproj", "{3EF62711-6313-4318-943E-12ACF2FB8CEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StbSharp.NETStandard", "..\StbSharp\StbSharp\StbSharp.NETStandard.csproj", "{34685509-3E66-4732-8DA1-AE9775FF849C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3EF62711-6313-4318-943E-12ACF2FB8CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF62711-6313-4318-943E-12ACF2FB8CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF62711-6313-4318-943E-12ACF2FB8CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34685509-3E66-4732-8DA1-AE9775FF849C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34685509-3E66-4732-8DA1-AE9775FF849C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34685509-3E66-4732-8DA1-AE9775FF849C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34685509-3E66-4732-8DA1-AE9775FF849C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -112,6 +112,7 @@
     <Compile Include="AssetsChanger\Assets\AnimationCurve.cs" />
     <Compile Include="AssetsConfig.cs" />
     <Compile Include="AssetsEngine.cs" />
+    <Compile Include="AssetsException.cs" />
     <Compile Include="PistolWhipAssets\AssetPayload.cs" />
     <Compile Include="PistolWhipAssets\BaseType.cs" />
     <Compile Include="PistolWhipAssets\ChunkMeshData.cs" />
@@ -183,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\StbSharp\StbSharp\StbSharp.NETStandard.csproj">
+      <Project>{34685509-3e66-4732-8da1-ae9775ff849c}</Project>
+      <Name>StbSharp.NETStandard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

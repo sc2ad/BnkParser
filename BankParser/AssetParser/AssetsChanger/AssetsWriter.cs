@@ -23,6 +23,11 @@ namespace AssetParser.AssetsChanger
                 Write(new byte[count]);
         }
 
+        public void Seek(int offsetFromStart)
+        {
+            BaseStream.Seek(offsetFromStart, SeekOrigin.Begin);
+        }
+
         public void WriteHash(byte[] value)
         {
             if (value == null)
@@ -89,7 +94,29 @@ namespace AssetParser.AssetsChanger
             Write((byte)0);
         }
 
+        public void WriteBEInt16(Int16 value)
+        {
+            var bytes = BitConverter.GetBytes(value);
+            Array.Reverse(bytes);
+            Write(bytes);
+        }
+
+        public void WriteBEUInt16(UInt16 value)
+        {
+            WriteBEInt16((Int16)value);
+        }
+
         public void WriteBEInt32(Int32 value)
+        {
+            var bytes = BitConverter.GetBytes(value);
+            Array.Reverse(bytes);
+            Write(bytes);
+        }
+        public void WriteBEUInt32(UInt32 value)
+        {
+            WriteBEInt32((int)value);
+        }
+        public void WriteBEInt64(Int64 value)
         {
             var bytes = BitConverter.GetBytes(value);
             Array.Reverse(bytes);
