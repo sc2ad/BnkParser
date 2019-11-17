@@ -23,6 +23,10 @@ namespace CustomSongsLoader
             Engine = new AssetsEngine(config, "NONE");
         }
         public IObjectInfo<LevelDatabase> MainDatabase { get; private set; }
+        public void Save()
+        {
+            Engine.Save();
+        }
         public void ReplaceSongPath(string songPath, string nameToReplace, string apkPath)
         {
             MainDatabase = Engine.Manager.MassFirstAsset<LevelDatabase>((oi) => true, false);
@@ -40,8 +44,8 @@ namespace CustomSongsLoader
             MainDatabase.ParentFile.AddObject(ac);
             targetKor.Object.SourceClip = ac.PtrFrom(targetKor.Object);
             targetKor.Object.SourceClipPath = "";
-            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + nameToReplace + ".ogg");
-            Engine.Save();
+            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + "/" + nameToReplace + ".ogg");
+            Save();
             fp.Save();
         }
 

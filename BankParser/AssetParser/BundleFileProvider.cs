@@ -14,13 +14,15 @@ namespace AssetParser
     {
         private FileStream _fileStream;
         private BundleFile _bundleFile;
+        private bool ReadOnly;
         public bool UseCombinedStream { get; private set; }
         private string _bundleFilename;
 
         public BundleFileProvider(string bundleFile, bool readOnly = true, bool useCombinedStream = false)
         {
             _bundleFilename = bundleFile;
-            _fileStream = File.Open(bundleFile, FileMode.Open, readOnly ? FileAccess.Read : FileAccess.ReadWrite);
+            ReadOnly = readOnly;
+            _fileStream = File.Open(bundleFile, FileMode.Open, readOnly ? FileAccess.ReadWrite : FileAccess.Read);
             _bundleFile = new BundleFile(_fileStream);
             UseCombinedStream = useCombinedStream;
         }
@@ -31,6 +33,12 @@ namespace AssetParser
             {
                 return Path.GetFileName(_bundleFilename);
             }
+        }
+
+        private void CheckRO()
+        {
+            if (ReadOnly)
+                throw new NotSupportedException("Cannot modify a read only file.");
         }
 
         public bool DirectoryExists(string path)
@@ -83,46 +91,103 @@ namespace AssetParser
             return GetEntry(filename).Data;
         }
 
-        #region "Not implemented things"
-
-        public void MkDir(string path, bool recursive = false)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RmRfDir(string path)
         {
-            throw new NotImplementedException();
+            CheckRO();
+            // Removes all files starting with path
+            _bundleFile.Entries.RemoveAll((de) => de.Filename.StartsWith(path.TrimEnd('/') + "/"));
         }
 
         public void Delete(string filename)
         {
-            throw new NotImplementedException();
+            CheckRO();
+            // Deletes the first file matching
+            _bundleFile.Entries.Remove(_bundleFile.Entries.FirstOrDefault((de) => de.Filename == filename));
         }
 
         public void DeleteFiles(string pattern)
         {
-            throw new NotImplementedException();
+            CheckRO();
+            // Remove all matching entries, they won't get saved to the stream as a result
+            _bundleFile.Entries.RemoveAll((e) => FilePatternMatch(e.Filename.ToLower(), pattern.ToLower()));
         }
 
         public void Save(string toFile = null)
         {
-            throw new NotImplementedException();
+            _fileStream.Close();
+            FileStream saveStream = null;
+            if (toFile == null)
+                saveStream = File.Open(_bundleFilename, FileMode.OpenOrCreate, FileAccess.Write);
+            if (toFile != null)
+                saveStream = File.Open(toFile, FileMode.Open, FileAccess.Write);
+
+            _bundleFile.Save(saveStream);
         }
 
         public void Write(string filename, byte[] data, bool overwrite = true, bool compressData = true)
         {
-            throw new NotImplementedException();
+            CheckRO();
+            DirectoryEntry existing = _bundleFile.Entries.FirstOrDefault(e => e.Filename == filename);
+            if (!overwrite && existing != null)
+            {
+                throw new Exception($"An entry named {filename} already exists and overwrite is false");
+            }
+            if (existing != null)
+            {
+                // Assuming uncompressed data.Length == existing.Size
+                existing.Size = data.Length;
+                existing.Data = data;
+                // We NEED to make sure we update all of our DirectoryEntry's offsets
+            } else
+            {
+                _bundleFile.Entries.Add(new DirectoryEntry()
+                {
+                    Filename = filename,
+                    Data = data,
+                    Size = data.Length
+                });
+            }
         }
 
         public void WriteFile(string sourceFilename, string targetFilename, bool overwrite = true, bool compressData = true)
         {
-            throw new NotImplementedException();
+            CheckRO();
+            DirectoryEntry src = _bundleFile.Entries.FirstOrDefault(e => e.Filename == sourceFilename);
+            if (src == null)
+            {
+                throw new Exception($"Could not find file {sourceFilename}");
+            }
+            DirectoryEntry dst = _bundleFile.Entries.FirstOrDefault(e => e.Filename == targetFilename);
+            if (!overwrite && dst != null)
+            {
+                throw new Exception($"An entry named {targetFilename} already exists and overwrite is false");
+            }
+            if (dst != null)
+            {
+                // Assuming uncompressed data.Length == existing.Size
+                dst.Size = src.Size;
+                dst.Data = src.Data;
+                // We NEED to make sure we update all of our DirectoryEntry's offsets
+            } else
+            {
+                _bundleFile.Entries.Add(new DirectoryEntry()
+                {
+                    Filename = targetFilename,
+                    Data = src.Data,
+                    Size = src.Size
+                });
+            }
         }
 
+        #region "Not implemented things"
+
+        public void MkDir(string path, bool recursive = false)
+        {
+            throw new NotImplementedException("Cannot create directories in Bundle File!");
+        }
         public Stream GetWriteStream(string filename)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Cannot GetWriteStream of a filename of an asset bundle!");
         }
 
         #endregion
