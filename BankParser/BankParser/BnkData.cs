@@ -24,6 +24,11 @@ namespace BankParser
         [JsonIgnore]
         public long Size => headerSize + 8 + didx.Size + data.Size + hirc.Size;
 
+        public BnkData(CustomBinaryReader reader)
+        {
+            Read(reader);
+        }
+
         public void Read(CustomBinaryReader reader)
         {
             header = reader.ReadBytes(4);
@@ -32,15 +37,23 @@ namespace BankParser
             long _headerStartPos = reader.Position;
             version = reader.ReadUInt32();
             headerData = reader.ReadBytes((int)(_headerStartPos - reader.Position + headerSize));
-            didx = new DIDXData();
-            didx.Read(reader);
-            data = new DATAData();
-            data.Read(reader);
-            hirc = new HIRCData();
-            hirc.Read(reader);
+            didx = new DIDXData(reader);
+            data = new DATAData(reader);
+            hirc = new HIRCData(reader);
         }
 
-        public byte[] DumpID(UInt32 id)
+        public void Write(CustomBinaryWriter writer, bool writeData = false)
+        {
+            writer.Write(header);
+            writer.Write(headerSize);
+            writer.Write(version);
+            writer.Write(headerData);
+            didx.Write(writer);
+            data.Write(writer);
+            hirc.Write(writer);
+        }
+
+        public byte[] DumpID(UInt32 id, int extra = 0)
         {
             foreach (var item in didx.dataIndexes)
             {
@@ -49,8 +62,8 @@ namespace BankParser
                     using (var ms = new MemoryStream(data.data))
                     {
                         ms.Seek(item.offset, SeekOrigin.Begin);
-                        byte[] oup = new byte[item.filesize];
-                        ms.Read(oup, 0, (int)item.filesize);
+                        byte[] oup = new byte[item.filesize + extra];
+                        ms.Read(oup, 0, (int)item.filesize + extra);
                         return oup;
                     }
                 }

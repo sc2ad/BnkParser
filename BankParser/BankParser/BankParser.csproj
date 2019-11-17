@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BnkData.cs" />
     <Compile Include="CustomBinaryReader.cs" />
+    <Compile Include="CustomBinaryWriter.cs" />
     <Compile Include="DATAData.cs" />
     <Compile Include="DataIndex.cs" />
     <Compile Include="DIDXData.cs" />

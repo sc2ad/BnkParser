@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankParser
 {
-    public class CustomBinaryReader : BinaryReader
+    public class CustomBinaryWriter : BinaryWriter
     {
         private const byte alignment = 4;
         public long Position
@@ -15,7 +15,7 @@ namespace BankParser
             get => BaseStream.Position;
             set => BaseStream.Position = value;
         }
-        public CustomBinaryReader(Stream input) : base(input)
+        public CustomBinaryWriter(Stream input) : base(input)
         {
         }
 
@@ -24,7 +24,22 @@ namespace BankParser
             var disp = alignment - Position % alignment;
             if (disp != 0)
             {
-                base.ReadBytes((int)disp);
+                WriteZeros((int)disp);
+            }
+        }
+
+        public void WriteZeros(int count)
+        {
+            byte[] bts = new byte[count];
+            Write(bts);
+        }
+
+        public void WriteMany<T>(IEnumerable<T> toWrite, Action<T> action = null) where T : Parsable
+        {
+            foreach (var t in toWrite)
+            {
+                t.Write(this);
+                action?.Invoke(t);
             }
         }
     }

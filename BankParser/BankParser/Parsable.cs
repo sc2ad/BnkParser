@@ -10,6 +10,6 @@ namespace BankParser
     {
         long Size { get; }
         void Read(CustomBinaryReader reader);
-        // Write
+        void Write(CustomBinaryWriter writer, bool writeData = true);
     }
 }

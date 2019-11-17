@@ -17,6 +17,11 @@ namespace BankParser
         [JsonIgnore]
         public long Size => size + 8;
 
+        public DIDXData(CustomBinaryReader reader)
+        {
+            Read(reader);
+        }
+
         public void Read(CustomBinaryReader reader)
         {
             header = reader.ReadBytes(4);
@@ -30,13 +35,19 @@ namespace BankParser
             dataIndexes = new DataIndex[size / 12];
             for (int i = 0; i < size / 12; i++)
             {
-                dataIndexes[i] = new DataIndex();
-                dataIndexes[i].Read(reader);
+                dataIndexes[i] = new DataIndex(reader);
             }
             if (reader.Position - _doubleCheck - size != 0)
             {
                 throw new ParseException($"Failed to parse DIDXData! Attempted to read: {size} bytes, but actually read: {reader.Position - _doubleCheck} bytes!");
             }
+        }
+
+        public void Write(CustomBinaryWriter writer, bool writeData = false)
+        {
+            writer.Write(header);
+            writer.Write(size);
+            writer.WriteMany(dataIndexes);
         }
     }
 }

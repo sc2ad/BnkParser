@@ -25,19 +25,24 @@ namespace BankParser
             {
                 bank = args[1];
             }
-            BnkData data = new BnkData();
-            using (var stream = new FileStream(bank, FileMode.Open))
-            {
-                using (var reader = new CustomBinaryReader(stream))
-                {
-                    data.Read(reader);
-                }
-            }
-
+            var stream = new FileStream(bank, FileMode.Open);
+            var reader = new CustomBinaryReader(stream);
+            BnkData data = new BnkData(reader);
+            Console.WriteLine($"Position: {reader.Position} / {reader.BaseStream.Length}");
             File.WriteAllText("out.json", JsonConvert.SerializeObject(data, Formatting.Indented));
             var dmp = data.DumpID(search);
-            if (dmp != null) {
-                File.WriteAllBytes("dump.dat", dmp);
+            if (dmp != null)
+            {
+                File.WriteAllBytes(search + ".dat", dmp);
+            }
+            Console.WriteLine("Writing new bank...");
+            stream.Dispose();
+            reader.Dispose();
+            using (stream = new FileStream("out.bnk", FileMode.OpenOrCreate))
+            {
+                var writer = new CustomBinaryWriter(stream);
+                data.Write(writer);
+                writer.Close();
             }
         }
     }

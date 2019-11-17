@@ -18,12 +18,24 @@ namespace BankParser
         [JsonIgnore]
         public long Size => size + 8;
 
+        public DATAData(CustomBinaryReader reader)
+        {
+            Read(reader);
+        }
+
         public void Read(CustomBinaryReader reader)
         {
             header = reader.ReadBytes(4);
             headerName = Encoding.UTF8.GetString(header);
             size = reader.ReadUInt32();
             data = reader.ReadBytes((int)size);
+        }
+
+        public void Write(CustomBinaryWriter writer, bool writeData = true)
+        {
+            writer.Write(header);
+            writer.Write(size);
+            writer.Write(data);
         }
     }
 }
