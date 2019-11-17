@@ -44,9 +44,8 @@ namespace CustomSongsLoader
             MainDatabase.ParentFile.AddObject(ac);
             targetKor.Object.SourceClip = ac.PtrFrom(targetKor.Object);
             targetKor.Object.SourceClipPath = "";
-            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + "/" + nameToReplace + ".ogg");
-            Save();
-            fp.Save();
+            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + "/" + nameToReplace + ".ogg", true);
+            fp.Save(); // Save, simply to close
         }
 
         public AudioClipObject LoadAudioClipObject(string songID, string songPath, IFileProvider songFileProvider)

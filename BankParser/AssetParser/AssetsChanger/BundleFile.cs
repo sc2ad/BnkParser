@@ -58,7 +58,6 @@ namespace AssetParser.AssetsChanger
         //private int decompressedSize;
         private uint flags;
         private byte[] infoBytes;
-        private byte[] properties;
 
         private void Parse(AssetsReader reader)
         {
@@ -234,7 +233,6 @@ namespace AssetParser.AssetsChanger
 
         private static byte[] LZMADecode(Stream inStream, int compressedSize, int uncompressedSize)
         {
-
             var decoder = new SevenZip.Compression.LZMA.Decoder();
             var properties = new byte[5];
             if (inStream.Read(properties, 0, 5) != 5)

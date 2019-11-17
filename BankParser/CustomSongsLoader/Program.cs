@@ -1,4 +1,4 @@
-﻿using AssetParser;
+using AssetParser;
 using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.PistolWhipAssets;
@@ -160,7 +160,11 @@ namespace CustomSongsLoader
             //Console.WriteLine("Success!");
 
             CustomLevelLoader loader = new CustomLevelLoader(path);
+            Console.WriteLine("Attempting to replace song...");
             loader.ReplaceSongPath(songPath, "BlackMagic_Edit", apkPath);
+            Console.WriteLine("Saving Assets... THIS TAKES AWHILE!");
+            //loader.Engine.Manager.OpenFiles[1].HasChanges = true;
+            loader.Save();
 
             //string jsonString;
             //using (StreamReader reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding))

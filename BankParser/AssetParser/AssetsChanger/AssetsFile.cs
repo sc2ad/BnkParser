@@ -295,6 +295,7 @@ namespace AssetParser.AssetsChanger
                                             }
                                             outputStream.Read(buffer, 0, buffer.Length);
                                             outFile.Write(buffer, 0, buffer.Length);
+                                            outFile.Close();
                                             splitCtr++;
                                         } while (true);
 
@@ -303,6 +304,7 @@ namespace AssetParser.AssetsChanger
                                     {
                                         Stream writeStream = FileProvider.GetWriteStream(AssetsRootPath.CombineFwdSlash(AssetsFilename));
                                         outputStream.CopyTo(writeStream);
+                                        writeStream.Close();
                                     }
                                 }
                                 FileProvider.Save();

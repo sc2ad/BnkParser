@@ -17,6 +17,8 @@ namespace AssetParser
         private bool ReadOnly;
         public bool UseCombinedStream { get; private set; }
         private string _bundleFilename;
+        private List<Stream> _readStreamsToClose = new List<Stream>();
+        private List<Stream> _writeStreamsToClose = new List<Stream>();
 
         public BundleFileProvider(string bundleFile, bool readOnly = true, bool useCombinedStream = false)
         {
@@ -24,6 +26,7 @@ namespace AssetParser
             ReadOnly = readOnly;
             _fileStream = File.Open(bundleFile, FileMode.Open, readOnly ? FileAccess.ReadWrite : FileAccess.Read);
             _bundleFile = new BundleFile(_fileStream);
+            _fileStream.Close();
             UseCombinedStream = useCombinedStream;
         }
 
@@ -39,6 +42,36 @@ namespace AssetParser
         {
             if (ReadOnly)
                 throw new NotSupportedException("Cannot modify a read only file.");
+        }
+
+        private void CloseReadStreams()
+        {
+            foreach (Stream s in _readStreamsToClose.ToList())
+            {
+                try
+                {
+                    s.Close();
+                    s.Dispose();
+                }
+                catch
+                { }
+                _readStreamsToClose.Remove(s);
+            }
+        }
+
+        private void CloseWriteStreams()
+        {
+            foreach (Stream s in _writeStreamsToClose.ToList())
+            {
+                try
+                {
+                    s.Close();
+                    s.Dispose();
+                }
+                catch
+                { }
+                _writeStreamsToClose.Remove(s);
+            }
         }
 
         public bool DirectoryExists(string path)
@@ -83,7 +116,9 @@ namespace AssetParser
 
         public Stream GetReadStream(string filename, bool bypassCache = false)
         {
-            return new MemoryStream(GetEntry(filename).Data);
+            var stream = new MemoryStream(GetEntry(filename).Data);
+            _readStreamsToClose.Add(stream);
+            return stream;
         }
 
         public byte[] Read(string filename)
@@ -114,14 +149,28 @@ namespace AssetParser
 
         public void Save(string toFile = null)
         {
-            _fileStream.Close();
+            CloseReadStreams();
+            CloseWriteStreams();
             FileStream saveStream = null;
-            if (toFile == null)
-                saveStream = File.Open(_bundleFilename, FileMode.OpenOrCreate, FileAccess.Write);
-            if (toFile != null)
-                saveStream = File.Open(toFile, FileMode.Open, FileAccess.Write);
+            try
+            {
+                if (toFile == null)
+                    saveStream = File.Open(_bundleFilename, FileMode.OpenOrCreate, FileAccess.Write);
+                if (toFile != null)
+                {
+                    saveStream = File.Open(_bundleFilename, FileMode.Open, FileAccess.Write);
+                }
+
+            }
+            catch (IOException ex)
+            {
+                // This file is being used by some process?
+                // What stream is using it that hasn't been closed yet?
+                Console.WriteLine("Could not open file, is it already opened? " + ex);
+            }
 
             _bundleFile.Save(saveStream);
+            saveStream.Close();
         }
 
         public void Write(string filename, byte[] data, bool overwrite = true, bool compressData = true)
@@ -187,13 +236,19 @@ namespace AssetParser
         }
         public Stream GetWriteStream(string filename)
         {
-            throw new NotImplementedException("Cannot GetWriteStream of a filename of an asset bundle!");
+            CheckRO();
+            MemoryStream ms = new MemoryStream();
+            var d = GetEntry(filename).Data;
+            ms.Write(d, 0, d.Length);
+            _writeStreamsToClose.Add(ms);
+            return ms;
         }
 
         #endregion
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
+
 
         protected virtual void Dispose(bool disposing)
         {
@@ -206,6 +261,8 @@ namespace AssetParser
                         _fileStream.Dispose();
                         _fileStream = null;
                     }
+                    CloseReadStreams();
+                    CloseWriteStreams();
                     _bundleFile = null;
                 }
                 disposedValue = true;
