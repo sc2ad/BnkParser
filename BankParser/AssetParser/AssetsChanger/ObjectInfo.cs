@@ -200,6 +200,9 @@ namespace AssetParser.AssetsChanger.Assets
                 case AssetsConstants.ClassID.MonoScriptType:
                     type = typeof(MonoScriptObject);
                     break;
+                case AssetsConstants.ClassID.RectTransformClassID:
+                    type = typeof(RectTransform);
+                    break;
                 default:
                     type = typeof(AssetsObject);
                     break;

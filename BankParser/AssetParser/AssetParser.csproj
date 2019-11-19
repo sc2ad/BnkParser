@@ -91,6 +91,7 @@
     <Compile Include="AssetsChanger\Assets\PackedSingleVector.cs" />
     <Compile Include="AssetsChanger\Assets\ProperySheet.cs" />
     <Compile Include="AssetsChanger\Assets\RectF.cs" />
+    <Compile Include="AssetsChanger\Assets\RectTransform.cs" />
     <Compile Include="AssetsChanger\Assets\SkinnedMeshRenderer.cs" />
     <Compile Include="AssetsChanger\Assets\StaticBatchInfo.cs" />
     <Compile Include="AssetsChanger\Assets\StreamedResource.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="AssetsConfig.cs" />
     <Compile Include="AssetsEngine.cs" />
     <Compile Include="AssetsException.cs" />
+    <Compile Include="PistolWhipAssets\AlbumArtDatabase.cs" />
     <Compile Include="PistolWhipAssets\AssetPayload.cs" />
     <Compile Include="PistolWhipAssets\BaseType.cs" />
     <Compile Include="PistolWhipAssets\ChunkMeshData.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="PistolWhipAssets\LevelDatabase.cs" />
     <Compile Include="PistolWhipAssets\LevelDecoratorBase.cs" />
     <Compile Include="PistolWhipAssets\OscillatingObjectData.cs" />
+    <Compile Include="PistolWhipAssets\SongPanelUIController.cs" />
     <Compile Include="PistolWhipAssets\SpectrumPayload.cs" />
     <Compile Include="PistolWhipAssets\TargetData.cs" />
     <Compile Include="BundleFileProvider.cs" />

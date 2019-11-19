@@ -12,6 +12,7 @@ namespace AssetParser
         public static Dictionary<string, Type> GetAssetTypeMap()
         {
             Dictionary<string, Type> scriptHashToTypes = new Dictionary<string, Type>();
+            scriptHashToTypes.Add("AlbumArtDatabase", typeof(AlbumArtDatabase));
             scriptHashToTypes.Add("AssetPayload", typeof(AssetPayload));
             scriptHashToTypes.Add("BaseType", typeof(BaseType));
             scriptHashToTypes.Add("BeatData", typeof(BeatData));
@@ -38,6 +39,7 @@ namespace AssetParser
             scriptHashToTypes.Add("LevelData", typeof(LevelData));
             scriptHashToTypes.Add("LevelDatabase", typeof(LevelDatabase));
             scriptHashToTypes.Add("LevelDecoratorBase", typeof(LevelDecoratorBase));
+            scriptHashToTypes.Add("SongPanelUIController", typeof(SongPanelUIController));
             scriptHashToTypes.Add("ObstacleData", typeof(ObstacleData));
             scriptHashToTypes.Add("SpectrumPayload", typeof(SpectrumPayload));
             scriptHashToTypes.Add("TargetData", typeof(TargetData));
@@ -56,5 +58,7 @@ namespace AssetParser
             scriptHashToTypes.Add("WwiseStateReference", typeof(WwiseStateReference));
             return scriptHashToTypes;
         }
+
+        public static readonly string DebugCertificatePEM = @"";
     }
 }
