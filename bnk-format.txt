@@ -1,0 +1,32 @@
+
+char {4} - header (BKHD) // BanK HeaDer
+uint32 {4} - size of BKHD
+uint32 {4} - unknown (version?)
+uint32 {4} - unknown
+uint32 {4} - unknown
+uint32 {4} - unknown
+byte {x} - zero padding (if any)
+// BKHD Header end
+char {4} - header (DIDX) // Data InDeX
+uint32 {4} - size of DIDX
+following by groups of 12 bytes each:
+	uint32 {4} - id
+	uint32 {4} - relative file offset from start of DATA, 16 bytes aligned
+	uint32 {4} - file size
+// DIDX Header end
+char {4} - header (DATA)
+uint32 {4} - size of DATA
+// ... data
+// DATA Header end
+char {4} - header (HIRC) // ???
+uint32 {4} - size of HIRC
+// ... data
+// HIRC Header end
+
+// char {4} - header (STID) // Sound Type ID
+// uint32 {4} - size of STID
+// uint32 {4} - Always 1?
+// uint32 {4} - Always 1?
+// uint32 {4} - unknown
+// byte {1} - TID Length (TL)
+// char {TL} - TID string (usually same as filename, but without extension)

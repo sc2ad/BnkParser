@@ -1,0 +1,81 @@
+
+hash(blackmagic): 518895575
+hash(black magic): 3369592243 (NONE)
+hash(blackmagic_edit): 1082331574 (NONE)
+hash(518895575): 3437550762 (NONE)
+hash(blackmagic_edit_01): 4230863940 (NONE)
+
+actual blackmagic: 328155820
+
+518895575: D7B7ED1E
+328155820: AC428F13
+
+=========
+364545883: 5B87BA15
+634865448: 2847D725
+
+328155820 --> 364545883 (size = 204)
+328155820 --> 634865448 (size = 120)
+
+
+
+AC428F13 Found at:
+0x240: DATA LABEL
+
+known IDs, (unknown ID):
+0x7377DB, 0x7377E9, (0x7377FA): Music Track at 0x7377C8, size=204
+0x738792, 0x7387A0, (0x7387B1): Music Track at 0x73877F, size=120
+
+5B87BA15 Found at:
+0x7377CD (known)
+0x7378C0 (same object, unknown)
+
+2847D725 Found at:
+0x738784 (known)
+0x73889D (same object, unknown)
+
+D7B7ED1E Found at:
+0x7390C6
+{
+    "Offset": "738D7F",
+    "Size": 1302,
+    "ID": 480661372,
+    "ObjTypeString": "Music Switch Container"
+}
+
+Offset 0x738e81: time signature 1
+0x32E = 120 4 byte sets
+0x512 = reader final position
+0x33E = State that I DEFINITELY WANT!
+0x512 - 0x33E = 1D4
+1D4 / 8 = 3A (r -4)
+1D4 / 12 = 1A (r 0)
+So this probably means that the ID could be the second element, or it could be the first with 12 bytes per block
+I count 0x32006400 39 times (inclusive end). First instance of this is at: 0x32E
+8 bytes before this 4 byte number should be start of all
+0x322 = 01 00 00 00
+This is moderately believable. Need to now cross check with some others to figure out what this 01 00 00 00 means
+
+
+
+0x32006400
+Appears many times throughout the Music Switch Container, towards the end (terminates with it)
+http://wiki.xentax.com/index.php/Wwise_SoundBank_(*.bnk)#type_.2312:_Music_Switch_Container
+
+0x73D7B0
+0x73D7C9
+{
+    "Offset": "73D782",
+    "Size": 236,
+    "ID": 439237621,
+    "ObjTypeString": "6"
+}
+
+0x73E5E7
+0x73E61C
+{
+    "Offset": "73E5B4",
+    "Size": 379,
+    "ID": 930794237,
+    "ObjTypeString": "6"
+}
