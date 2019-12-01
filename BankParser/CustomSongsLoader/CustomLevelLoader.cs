@@ -23,6 +23,7 @@ namespace CustomSongsLoader
             Engine = new AssetsEngine(config, "NONE");
         }
         public IObjectInfo<LevelDatabase> MainDatabase { get; private set; }
+        public IObjectInfo<AlbumArtDatabase> AlbumDatabase { get; private set; }
         public void Save()
         {
             Engine.Save();
@@ -34,18 +35,55 @@ namespace CustomSongsLoader
             {
                 throw new AssetsException("Could not find main level database!");
             }
+            AlbumDatabase = Engine.Manager.MassFirstAsset<AlbumArtDatabase>((oi) => true, false);
+            if (AlbumDatabase == null || AlbumDatabase.Object == null)
+            {
+                throw new AssetsException("Could not find album database!");
+            }
             IObjectInfo<Koreography> targetKor = Engine.Manager.MassFirstAsset<Koreography>((o) => o.Object.Name == nameToReplace, false);
             if (targetKor == null || targetKor.Object == null)
             {
                 throw new AssetsException("Could not find a Koreography object matching name: " + nameToReplace + "!");
             }
             var fp = new FolderFileProvider(songPath.GetDirectoryFwdSlash(), false);
-            var ac = LoadAudioClipObject(nameToReplace, songPath, fp);
-            MainDatabase.ParentFile.AddObject(ac);
-            targetKor.Object.SourceClip = ac.PtrFrom(targetKor.Object);
-            targetKor.Object.SourceClipPath = "";
-            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + "/" + nameToReplace + ".ogg", true);
+            //var ac = LoadAudioClipObject(nameToReplace, songPath, fp);
+            //MainDatabase.ParentFile.AddObject(ac);
+            // Copy Existing Song Info and add it
+            CopyExistingSongDataByIndex(indexToCopy);
+            // Replace Song of copied data with desired song
+
+            // Apply BNK modifications
+
+            // Copy new song into folder
+            //targetKor.Object.SourceClip = ac.PtrFrom(targetKor.Object);
+            //targetKor.Object.SourceClipPath = "";
+            File.Copy(songPath, apkPath.GetFilenameFwdSlash() + "/" + nameToReplace + ".wem", true);
             fp.Save(); // Save, simply to close
+        }
+        public void CopyExistingSongDataByIndex(int index)
+        {
+            var toCopyLD = MainDatabase.Object.levelData[index];
+            MainDatabase.Object.levelData.Add(toCopyLD);
+            //var toCopyK = MainDatabase.Object.koreoSets[index];
+            //MainDatabase.Object.koreoSets.Add(toCopyK);
+            AddCoverToDatabase(index);
+        }
+
+        public void AddCoverToDatabase(int indexToCopy)
+        {
+            var toCopy = AlbumDatabase.Object.albumMetadata[indexToCopy];
+            // TODO, copy constructor?
+            AlbumDatabase.Object.albumMetadata.Add(new AlbumArtDatabase.AlbumArtMetadata()
+            {
+                art = toCopy.art,
+                artIsWIP = toCopy.artIsWIP,
+                levelData = toCopy.levelData,
+                shortSongName = toCopy.shortSongName,
+                songName = toCopy.songName,
+                tempo = toCopy.tempo,
+                shortSongArtists = toCopy.shortSongArtists,
+                songArtists = toCopy.songArtists
+            });
         }
 
         public AudioClipObject LoadAudioClipObject(string songID, string songPath, IFileProvider songFileProvider)

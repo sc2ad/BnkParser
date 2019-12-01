@@ -35,6 +35,5 @@ namespace AssetParser.PistolWhipAssets
             writer.Write(moveScale);
             writer.Write(phase);
         }
-        
     }
 }

@@ -35,6 +35,33 @@ namespace BankParser
             {
                 File.WriteAllBytes(search + ".dat", dmp);
             }
+            Console.WriteLine("Trying some Hashes:");
+            var toHash = new List<string>()
+            {
+                "../PistolWhip_Wwise/Originals/SFX/BlackMagic_Edit_01.wav",
+                "BlackMagic",
+                "Black Magic",
+                "BlackMagic_Edit",
+                "518895575",
+                "BlackMagic_Edit_01",
+                @"D:\Pistol Whip Repo\PistolWhip_Wwise\.cache\Android\SFX\BlackMagic_Edit_01_C0D53808.wem",
+                @"\Interactive Music Hierarchy\Default Work Unit\Music\BlackMagic\BlackMagic_Edit_01",
+                "C0D53808",
+                "C0D53808.wem",
+                "BlackMagic_Edit_01_C0D53808",
+                "BlackMagic_Edit_01_C0D53808.wem"
+            };
+            foreach (var s in toHash)
+            {
+                // Need to lower the string
+                string lower = s.ToLower();
+                // Then convert it to UTF8/ASCII
+                byte[] val = Encoding.ASCII.GetBytes(lower);
+                foreach (var type in Enum.GetValues(typeof(HashType)))
+                {
+                    Console.WriteLine($"Val: {lower} Hash ({(HashType)type}): {new FNVHash((HashType)type).Compute(val, val.Length)}");
+                }
+            }
             Console.WriteLine("Writing new bank...");
             stream.Dispose();
             reader.Dispose();

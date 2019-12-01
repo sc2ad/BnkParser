@@ -27,5 +27,15 @@ namespace BankParser
                 base.ReadBytes((int)disp);
             }
         }
+
+        public List<T> ReadMany<T>(Func<CustomBinaryReader, T> creator, ulong count)
+        {
+            var lst = new List<T>((int)count);
+            for (ulong i = 0; i < count; i++)
+            {
+                lst.Add(creator(this));
+            }
+            return lst;
+        }
     }
 }

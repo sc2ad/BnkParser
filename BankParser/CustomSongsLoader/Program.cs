@@ -1,4 +1,4 @@
-using AssetParser;
+﻿using AssetParser;
 using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.PistolWhipAssets;

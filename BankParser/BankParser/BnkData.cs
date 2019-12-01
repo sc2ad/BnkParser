@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BankParser.HIRCData;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ namespace BankParser
         // pad
         public DIDXData didx;
         public DATAData data;
-        public HIRCData hirc;
+        public HIRCDataObject hirc;
         [JsonIgnore]
         public long Size => headerSize + 8 + didx.Size + data.Size + hirc.Size;
 
@@ -39,7 +40,7 @@ namespace BankParser
             headerData = reader.ReadBytes((int)(_headerStartPos - reader.Position + headerSize));
             didx = new DIDXData(reader);
             data = new DATAData(reader);
-            hirc = new HIRCData(reader);
+            hirc = new HIRCDataObject(reader);
         }
 
         public void Write(CustomBinaryWriter writer, bool writeData = false)

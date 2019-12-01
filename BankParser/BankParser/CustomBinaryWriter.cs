@@ -34,11 +34,12 @@ namespace BankParser
             Write(bts);
         }
 
-        public void WriteMany<T>(IEnumerable<T> toWrite, Action<T> action = null) where T : Parsable
+        public void WriteMany<T>(IEnumerable<T> toWrite, Action<T> action = null)
         {
             foreach (var t in toWrite)
             {
-                t.Write(this);
+                if (t is Parsable)
+                    (t as Parsable).Write(this);
                 action?.Invoke(t);
             }
         }
