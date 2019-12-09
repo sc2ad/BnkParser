@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace AssetParser.PistolWhipAssets
         public bool showFailureIndicators { get; set; }
         public bool showRegionBoundsIndicators { get; set; }
         public bool showPropBoundsIndicators { get; set; }
-
+        [JsonConstructor]
+        public LevelDecoratorBase() { }
         public LevelDecoratorBase(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

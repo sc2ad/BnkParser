@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace AssetParser.PistolWhipAssets
     {
         public Placement placement { get; set; }
         public ObstacleType obstacleType { get; set; }
-
+        [JsonConstructor]
+        public ObstacleData() { }
         public ObstacleData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

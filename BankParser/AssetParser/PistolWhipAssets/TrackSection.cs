@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,9 @@ namespace AssetParser.PistolWhipAssets
         public bool generateDebris { get; set; }
         // Align4
         public Debris debris { get; set; } // 0x21C
-        public int propSeed { get; set; } 
-
+        public int propSeed { get; set; }
+        [JsonConstructor]
+        public TrackSection() { }
 
         public TrackSection(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {

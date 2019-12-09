@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace AssetParser.PistolWhipAssets
     public sealed class EnemySequence : MonoBehaviourObject, INeedAssetsMetadata
     {
         public EnemyToughness enemyType { get; set; }
-        public ISmartPtr<GameObject> actionHolder { get; set; }
+        public SmartPtr<GameObject> actionHolder { get; set; }
         public List<SmartPtr<EnemyAction>> actions { get; set; }
         public Single playerActionLerp { get; set; }
         public WorldPoint localActionPoint { get; set; }
@@ -21,8 +22,9 @@ namespace AssetParser.PistolWhipAssets
         public bool isThreat { get; set; }
         // Align4
         public Single duration { get; set; }
-        public ISmartPtr<Enemy> actor { get; set; }
-
+        public SmartPtr<Enemy> actor { get; set; }
+        [JsonConstructor]
+        public EnemySequence() { }
         public EnemySequence(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

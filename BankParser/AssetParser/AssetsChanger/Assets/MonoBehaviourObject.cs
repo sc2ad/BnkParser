@@ -11,6 +11,8 @@ namespace AssetParser.AssetsChanger.Assets
 {
     public class MonoBehaviourObject : Component, IHaveName
     {
+        [JsonConstructor]
+        public MonoBehaviourObject() { }
         public MonoBehaviourObject(AssetsFile assetsFile, MonoScriptObject scriptObject) : base(assetsFile, scriptObject.PropertiesHash)
         {
             Enabled = 1;
@@ -27,13 +29,10 @@ namespace AssetParser.AssetsChanger.Assets
         private byte[] _scriptParametersData;
 
 
-        [JsonIgnore]
         public int Enabled { get; set; } = 1;
 
-        [JsonIgnore]
-        public ISmartPtr<MonoScriptObject> MonoscriptTypePtr { get; set; }
+        public SmartPtr<MonoScriptObject> MonoscriptTypePtr { get; set; }
 
-        [JsonIgnore]
         public string Name { get; set; }
 
         [JsonIgnore]

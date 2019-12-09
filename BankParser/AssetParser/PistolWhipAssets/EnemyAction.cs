@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace AssetParser.PistolWhipAssets
         public Single duration { get; set; }
         public WorldPoint localStartingPoint { get; set; }
         public WorldPoint localEndingPoint { get; set; }
-        public ISmartPtr<EnemySequence> sequence { get; set; }
+        public SmartPtr<EnemySequence> sequence { get; set; }
         public Single sequenceStartTime { get; set; }
-
+        [JsonConstructor]
+        public EnemyAction() { }
         public EnemyAction(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

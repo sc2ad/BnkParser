@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace AssetParser.PistolWhipAssets
         public Single groundFloorDensity { get; set; }
         public Single upperFloorChance { get; set; }
         public Single upperFloorDensity { get; set; }
+        [JsonConstructor]
+        public WallDecorator() { }
         public WallDecorator(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,8 @@ namespace AssetParser.PistolWhipAssets
         public List<SmartPtr<AssetsObject>> playerKillers { get; set; }
         public SmartPtr<Transform> target { get; set; }
         public List<Single> fireTimes { get; set; }
+        [JsonConstructor]
+        public Enemy() { }
 
         public Enemy(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {

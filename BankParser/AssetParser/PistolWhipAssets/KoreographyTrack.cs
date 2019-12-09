@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace AssetParser.PistolWhipAssets
         public List<int> _SpectrumPayloadIdxs { get; set; }
         public List<TextPayload> TextPayloads { get; set; }
         public List<int> _TextPayloadIdxs { get; set; }
-
+        [JsonConstructor]
+        public KoreographyTrack() { }
         public KoreographyTrack(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

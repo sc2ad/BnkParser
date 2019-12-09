@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace AssetParser.PistolWhipAssets
         public Vector3I min { get; set; }
         public Vector3I max { get; set; }
         public Region region { get; set; }
+        [JsonConstructor]
+        public WorldRegion() { }
         public WorldRegion(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

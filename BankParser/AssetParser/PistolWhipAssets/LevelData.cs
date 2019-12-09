@@ -18,7 +18,7 @@ namespace AssetParser.PistolWhipAssets
         public int worldEnd { get; set; }
         public bool isPlayable { get; set; }
         // Align4
-        public ISmartPtr<WwiseStateReference> songSwitch { get; set; }
+        public SmartPtr<WwiseStateReference> songSwitch { get; set; }
         public List<GameMap> maps { get; set; }
         // Starts at 0x1B4
         public List<TrackSection> sections { get; set; }
@@ -38,6 +38,8 @@ namespace AssetParser.PistolWhipAssets
         public Single songLength { get; set; }
         [JsonIgnore]
         public byte[] sectionData { get; set; }
+        [JsonConstructor]
+        public LevelData() { }
 
         public LevelData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {

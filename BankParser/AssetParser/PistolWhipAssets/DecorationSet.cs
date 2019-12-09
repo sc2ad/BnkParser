@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace AssetParser.PistolWhipAssets
     {
         public List<DecorationEntry> set { get; set; }
         public Single totalWeight { get; set; }
+        [JsonConstructor]
+        public DecorationSet() { }
         public DecorationSet(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("DecorationSet"))
         {
         }

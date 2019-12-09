@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomSongsLoader", "Custom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StbSharp.NETStandard", "..\StbSharp\StbSharp\StbSharp.NETStandard.csproj", "{34685509-3E66-4732-8DA1-AE9775FF849C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONLoader", "JSONLoader\JSONLoader.csproj", "{35FCB7C4-AEF3-4A03-A555-02FE95902190}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{34685509-3E66-4732-8DA1-AE9775FF849C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34685509-3E66-4732-8DA1-AE9775FF849C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34685509-3E66-4732-8DA1-AE9775FF849C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FCB7C4-AEF3-4A03-A555-02FE95902190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FCB7C4-AEF3-4A03-A555-02FE95902190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FCB7C4-AEF3-4A03-A555-02FE95902190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FCB7C4-AEF3-4A03-A555-02FE95902190}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

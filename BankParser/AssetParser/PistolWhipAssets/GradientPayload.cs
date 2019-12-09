@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace AssetParser.PistolWhipAssets
     public class GradientPayload : MonoBehaviourObject
     {
         public Gradient val { get; set; }
+        [JsonConstructor]
+        public GradientPayload() { }
         public GradientPayload(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("GradientPayload"))
         {
         }

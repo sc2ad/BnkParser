@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace AssetParser.PistolWhipAssets
 {
     public class WwiseGroupValueObjectReference : WwiseObjectReference
     {
+        [JsonConstructor]
+        public WwiseGroupValueObjectReference() { }
         public WwiseGroupValueObjectReference(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("WwiseGroupValueObjectReference"))
         {
         }

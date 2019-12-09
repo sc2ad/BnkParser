@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace AssetParser.PistolWhipAssets
         public SmartPtr<WwiseKoreographySet> frontLotKoreoSet { get; set; }
         public List<SmartPtr<WwiseKoreographySet>> koreoSets { get; set; }
         public List<SmartPtr<LevelData>> levelData { get; set; }
-
+        [JsonConstructor]
+        public LevelDatabase() { }
         public LevelDatabase(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

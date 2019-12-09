@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace AssetParser.PistolWhipAssets
         // Not sure what these are, but they are always the same
         public int FirstFour { get; set; }
         public int SecondFour { get; set; }
+        [JsonConstructor]
+        public AssetPayload() { }
         public AssetPayload(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("AssetPayload"))
         {
         }

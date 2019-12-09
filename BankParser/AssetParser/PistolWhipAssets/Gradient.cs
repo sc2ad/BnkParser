@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace AssetParser.PistolWhipAssets
         public List<GradientColorKey> colorKeys { get; set; }
         public List<GradientAlphaKey> alphaKeys { get; set; }
         public GradientMode mode { get; set; }
+        [JsonConstructor]
+        public Gradient() { }
         public Gradient(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("Gradient"))
         {
         }

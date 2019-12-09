@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace AssetParser.PistolWhipAssets
         // TYPE: Collider
         public SmartPtr<AssetsObject> selectableTrigger { get; set; }
         public SmartPtr<RectTransform> infoAnchorPoint { get; set; }
+        [JsonConstructor]
+        public SongPanelUIController() { }
         public SongPanelUIController(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("SongPanelUIController"))
         {
         }

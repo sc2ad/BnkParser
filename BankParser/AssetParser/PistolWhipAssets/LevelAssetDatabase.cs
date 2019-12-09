@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace AssetParser.PistolWhipAssets
         public SmartPtr<GameObject> limboObstacleTall { get; set; }
         public SmartPtr<GameObject> limboObstacleShort { get; set; }
         public List<SmartPtr<LevelDecoratorBase>> levelDecorators { get; set; }
-
+        [JsonConstructor]
+        public LevelAssetDatabase() { }
         public LevelAssetDatabase(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

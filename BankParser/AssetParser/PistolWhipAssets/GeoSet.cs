@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace AssetParser.PistolWhipAssets
         public List<WorldObject> dynamicProps { get; set; }
         // 0x195D4C
         public List<OscillatingObjectData> decoratorCubes { get; set; }
-
+        [JsonConstructor]
+        public GeoSet() { }
         public GeoSet(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

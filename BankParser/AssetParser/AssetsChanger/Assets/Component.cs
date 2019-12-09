@@ -11,6 +11,11 @@ namespace AssetParser.AssetsChanger.Assets
 {
     public abstract class Component : AssetsObject
     {
+        [JsonConstructor]
+        public Component()
+        {
+
+        }
         protected Component(AssetsFile assetsFile, int classID) : base(assetsFile, classID)
         {
         }

@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace AssetParser.PistolWhipAssets
 {
     public class GameMap : MonoBehaviourObject, INeedAssetsMetadata
     {
-        public ISmartPtr<LevelData> data { get; set; }
-        public ISmartPtr<TrackData> trackData { get; set; }
-        public ISmartPtr<GeoSet> geoSet { get; set; }
+        public SmartPtr<LevelData> data { get; set; }
+        public SmartPtr<TrackData> trackData { get; set; }
+        public SmartPtr<GeoSet> geoSet { get; set; }
         public bool isPlayable { get; set; }
         // Align4
         public int enemyIgnoreCount { get; set; }
@@ -22,7 +23,8 @@ namespace AssetParser.PistolWhipAssets
         public int trueMaxScore { get; set; }
         public int rankMaxScore { get; set; }
         public List<int> rankQuotas { get; set; }
-
+        [JsonConstructor]
+        public GameMap() { }
         public GameMap(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

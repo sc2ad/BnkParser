@@ -1,4 +1,5 @@
 ﻿using AssetParser.AssetsChanger;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AssetParser.PistolWhipAssets
     {
         public Single walk { get; set; }
         public Single run { get; set; }
-
+        [JsonConstructor]
         public EnemyMovement()
         { }
 

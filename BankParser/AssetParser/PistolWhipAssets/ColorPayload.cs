@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace AssetParser.PistolWhipAssets
     public class ColorPayload : MonoBehaviourObject
     {
         public Color val { get; set; }
+        [JsonConstructor]
+        public ColorPayload() { }
         public ColorPayload(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("ColorPayload"))
         {
         }

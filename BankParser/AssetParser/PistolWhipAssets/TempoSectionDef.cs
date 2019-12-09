@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace AssetParser.PistolWhipAssets
         public int beatsPerMeasure { get; set; }
         public bool startNewMeasure { get; set; }
         // Align4
-
+        [JsonConstructor]
+        public TempoSectionDef() { }
         public TempoSectionDef(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

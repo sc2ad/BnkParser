@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace AssetParser.PistolWhipAssets
     {
         public int idInternal { get; set; }
         public byte[] valueGuidInternal { get; set; }
+        [JsonConstructor]
+        public BaseType() { }
         public BaseType(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

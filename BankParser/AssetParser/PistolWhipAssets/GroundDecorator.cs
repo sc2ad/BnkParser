@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace AssetParser.PistolWhipAssets
         public SmartPtr<DecorationSet> decorations { get; set; }
         public Single decorationChance { get; set; }
         public Single decorationDensity { get; set; }
+        [JsonConstructor]
+        public GroundDecorator() { }
         public GroundDecorator(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

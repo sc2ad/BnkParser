@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ namespace AssetParser.PistolWhipAssets
     public class WorldObject : MonoBehaviourObject, INeedAssetsMetadata
     {
         public WorldPoint point { get; set; }
-        public ISmartPtr<GameObject> prefab { get; set; }
+        public SmartPtr<GameObject> prefab { get; set; }
         public Vector3F scale { get; set; }
-
+        [JsonConstructor]
+        public WorldObject() { }
         public WorldObject(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

@@ -1,5 +1,6 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace AssetParser.PistolWhipAssets
         public List<int> meshSizes { get; set; }
         // 0x284
         public List<int> tris { get; set; }
-
+        [JsonConstructor]
         public ChunkMeshData()
         { }
 

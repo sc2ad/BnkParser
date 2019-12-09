@@ -16,10 +16,11 @@ namespace AssetParser.PistolWhipAssets
         public Vector2F placement { get; set; }
         public EnemyToughness toughness { get; set; }
         public WorldPoint enemyOffset { get; set; }
-        public ISmartPtr<EnemySequence> enemySequence { get; set; }
+        public SmartPtr<EnemySequence> enemySequence { get; set; }
         public bool ignoreForLevelRank { get; set; }
         // Align4
-
+        [JsonConstructor]
+        public TargetData() { }
         public TargetData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

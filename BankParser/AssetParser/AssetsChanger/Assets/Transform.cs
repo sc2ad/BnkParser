@@ -31,7 +31,7 @@ namespace AssetParser.AssetsChanger.Assets
             LocalRotation = new QuaternionF(reader);
             LocalPosition = new Vector3F(reader);
             LocalScale = new Vector3F(reader);
-            Children = reader.ReadArrayOf(x => (ISmartPtr<Transform>)SmartPtr<Transform>.Read(ObjectInfo.ParentFile, this, reader));
+            Children = reader.ReadArrayOf(x => (SmartPtr<Transform>)SmartPtr<Transform>.Read(ObjectInfo.ParentFile, this, reader));
             Father = SmartPtr<Transform>.Read(ObjectInfo.ParentFile, this, reader);
         }
 
@@ -48,8 +48,8 @@ namespace AssetParser.AssetsChanger.Assets
         public QuaternionF LocalRotation { get; set; }
         public Vector3F LocalPosition { get; set; }
         public Vector3F LocalScale { get; set; }
-        public List<ISmartPtr<Transform>> Children { get; set; } = new List<ISmartPtr<Transform>>();
-        public ISmartPtr<Transform> Father { get; set; }
+        public List<SmartPtr<Transform>> Children { get; set; } = new List<SmartPtr<Transform>>();
+        public SmartPtr<Transform> Father { get; set; }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace AssetParser.PistolWhipAssets
     public class WwiseStateReference : WwiseGroupValueObjectReference, INeedAssetsMetadata
     {
         public SmartPtr<WwiseStateGroupReference> WwiseStateGroupReference { get; set; }
-
+        [JsonConstructor]
+        public WwiseStateReference() { }
         public WwiseStateReference(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
         {
         }

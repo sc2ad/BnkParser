@@ -2,6 +2,7 @@
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
 using AssetParser.PistolWhipAssets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,14 @@ namespace AssetParser.PistolWhipAssets
 {
     public sealed class TrackData : MonoBehaviourObject, INeedAssetsMetadata
     {
-        public ISmartPtr<LevelData> level { get; set; }
+        public SmartPtr<LevelData> level { get; set; }
         public Difficulty difficulty { get; set; }
-        public ISmartPtr<Koreography> koreography { get; set; }
+        public SmartPtr<Koreography> koreography { get; set; }
         public Single playerSpeed { get; set; }
         List<Single> beatTimes { get; set; }
         List<BeatData> beats { get; set; }
+        [JsonConstructor]
+        public TrackData() { }
 
         public TrackData(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {

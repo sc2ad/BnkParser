@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,15 @@ namespace AssetParser.PistolWhipAssets
 {
     public sealed class Koreography : MonoBehaviourObject, INeedAssetsMetadata
     {
-        public ISmartPtr<AudioClipObject> SourceClip { get; set; }
+        public SmartPtr<AudioClipObject> SourceClip { get; set; }
         public string SourceClipPath { get; set; }
         public int SampleRate { get; set; }
         public bool IgnoreLatencyOffset { get; set; }
         // Align4
         List<TempoSectionDef> TempoSections { get; set; }
         List<SmartPtr<KoreographyTrackBase>> Tracks { get; set; }
-
+        [JsonConstructor]
+        public Koreography() { }
         public Koreography(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool readLiteral = false) : base(objectInfo, reader, readLiteral)
         {
         }

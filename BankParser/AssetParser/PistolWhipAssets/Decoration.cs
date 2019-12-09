@@ -1,6 +1,7 @@
 ﻿using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using AssetParser.AssetsChanger.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace AssetParser.PistolWhipAssets
         public Vector3F minimumScale { get; set; }
         public Vector3F maximumScale { get; set; }
         public Bounds bounds { get; set; }
+        [JsonConstructor]
+        public Decoration() { }
         public Decoration(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("Decoration"))
         {
         }
