@@ -65,6 +65,8 @@ namespace AssetParser
             {
                 try
                 {
+                    // TODO: Read from TempStream
+                    // and then close it/dispose it
                     s.Close();
                     s.Dispose();
                 }
@@ -158,7 +160,7 @@ namespace AssetParser
                     saveStream = File.Open(_bundleFilename, FileMode.OpenOrCreate, FileAccess.Write);
                 if (toFile != null)
                 {
-                    saveStream = File.Open(_bundleFilename, FileMode.Open, FileAccess.Write);
+                    saveStream = File.Open(toFile, FileMode.OpenOrCreate, FileAccess.Write);
                 }
 
             }

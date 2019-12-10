@@ -132,7 +132,10 @@ namespace AssetParser.AssetsChanger
                 x.Write(writer);
             });
             writer.Write(Adds.Count());
-            Adds.ForEach(x => x.Write(writer));
+            Adds.ForEach(x => {
+                writer.AlignTo(4);
+                x.Write(writer);
+            });
             writer.Write(ExternalFiles.Count());
             ExternalFiles.ForEach(x => x.Write(writer));
             writer.WriteCString("");

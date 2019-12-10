@@ -143,7 +143,8 @@ namespace JSONLoader
             { "LevelData", typeof(LevelData) },
             { "Koreography", typeof(Koreography) },
             { "TrackData", typeof(TrackData) },
-            { "GeoSet", typeof(GeoSet) },
+            { "MeshObject", typeof(MeshObject) },
+            //{ "GeoSet", typeof(GeoSet) },
             { "LevelDatabase", typeof(LevelDatabase) },
             { "LevelAssetDatabase", typeof(LevelAssetDatabase) },
             { "WwiseStateReference", typeof(WwiseStateReference) }
@@ -155,7 +156,7 @@ namespace JSONLoader
             var lds = Engine.Manager.MassFindAssets<LevelData>((oi) => true, false);
             var kors = Engine.Manager.MassFindAssets<Koreography>((oi) => true, false);
             var tds = Engine.Manager.MassFindAssets<TrackData>((oi) => true, false);
-            var gs = Engine.Manager.MassFindAssets<GeoSet>((oi) => true, false);
+            //var gs = Engine.Manager.MassFindAssets<GeoSet>((oi) => true, false);
             var ldb = Engine.Manager.MassFindAssets<LevelDatabase>((oi) => true, false);
             var ladb = Engine.Manager.MassFindAssets<LevelAssetDatabase>((oi) => true, false);
             var wwsrs = Engine.Manager.MassFindAssets<WwiseStateReference>((oi) => true, false);
@@ -165,7 +166,7 @@ namespace JSONLoader
             DumpAll(lds);
             DumpAll(kors);
             DumpAll(tds);
-            DumpAll(gs);
+            //DumpAll(gs);
             DumpAll(ldb);
             DumpAll(ladb);
             DumpAll(wwsrs);
@@ -182,28 +183,33 @@ namespace JSONLoader
             object asset = null;
             switch (typeName)
             {
-                case "LevelData":
-                    asset = Engine.Manager.MassFirstAsset<LevelData>((oi) => oi.Object.Name == (o as LevelData).Name, false);
-                    break;
-                case "Koreography":
-                    asset = Engine.Manager.MassFirstAsset<Koreography>((oi) => oi.Object.Name == (o as Koreography).Name, false);
-                    break;
-                case "TrackData":
-                    asset = Engine.Manager.MassFirstAsset<TrackData>((oi) => oi.Object.Name == (o as TrackData).Name, false);
-                    break;
-                case "GeoSet":
-                    asset = Engine.Manager.MassFirstAsset<GeoSet>((oi) => oi.Object.Name == (o as GeoSet).Name, false);
-                    break;
+                //case "LevelData":
+                //    asset = Engine.Manager.MassFirstAsset<LevelData>((oi) => oi.Object.Name == (o as LevelData).Name, false);
+                //    break;
+                //case "Koreography":
+                //    asset = Engine.Manager.MassFirstAsset<Koreography>((oi) => oi.Object.Name == (o as Koreography).Name, false);
+                //    break;
+                //case "TrackData":
+                //    asset = Engine.Manager.MassFirstAsset<TrackData>((oi) => oi.Object.Name == (o as TrackData).Name, false);
+                //    break;
+                //case "MeshObject":
+                //    asset = Engine.Manager.MassFirstAsset<MeshObject>((oi) => oi.Object.Name == (o as MeshObject).Name, false);
+                //    break;
+                //case "GeoSet":
+                //    asset = Engine.Manager.MassFirstAsset<GeoSet>((oi) => oi.Object.Name == (o as GeoSet).Name, false);
+                //    break;
                 case "LevelDatabase":
                     asset = Engine.Manager.MassFirstAsset<LevelDatabase>((oi) => oi.Object.Name == (o as LevelDatabase).Name, false);
                     break;
-                case "LevelAssetDatabase":
-                    asset = Engine.Manager.MassFirstAsset<LevelAssetDatabase>((oi) => oi.Object.Name == (o as LevelAssetDatabase).Name, false);
-                    break;
-                case "WwiseStateReference":
-                    asset = Engine.Manager.MassFirstAsset<WwiseStateReference>((oi) => oi.Object.Name == (o as WwiseStateReference).Name, false);
-                    break;
+                //case "LevelAssetDatabase":
+                //    asset = Engine.Manager.MassFirstAsset<LevelAssetDatabase>((oi) => oi.Object.Name == (o as LevelAssetDatabase).Name, false);
+                //    break;
+                //case "WwiseStateReference":
+                //    asset = Engine.Manager.MassFirstAsset<WwiseStateReference>((oi) => oi.Object.Name == (o as WwiseStateReference).Name, false);
+                //    break;
             }
+            if (asset == null)
+                return;
             var obj = asset.GetType().GetProperty("Object").GetValue(asset);
             foreach (var p in obj.GetType().GetProperties())
             {
@@ -239,6 +245,7 @@ namespace JSONLoader
                     if (f.EndsWith(".json"))
                         ReplaceObject(type.Name, JsonConvert.DeserializeObject(File.ReadAllText(f), type));
                 }
+                // Let's try to save after writing each type, perhaps this will help limit the memory footprint
             }
             Console.WriteLine("Complete!");
         }

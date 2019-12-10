@@ -1,4 +1,4 @@
-﻿using AssetParser.AssetsChanger.Assets;
+using AssetParser.AssetsChanger.Assets;
 using AssetParser.Utils;
 using AssetParser.Utils.Logging;
 using System;
@@ -269,6 +269,7 @@ namespace AssetParser.AssetsChanger
                                         Header.Write(writer);
                                     }
                                     metaMS.CopyTo(outputStream);
+                                    metaMS.Close();
 
 
                                     if (diff > 0)
@@ -277,6 +278,7 @@ namespace AssetParser.AssetsChanger
                                     }
 
                                     objectsMS.CopyTo(outputStream);
+                                    objectsMS.Close();
 
                                     outputStream.Seek(0, SeekOrigin.Begin);
                                     if (FileWasSplit)
@@ -302,9 +304,9 @@ namespace AssetParser.AssetsChanger
                                     }
                                     else
                                     {
-                                        Stream writeStream = FileProvider.GetWriteStream(AssetsRootPath.CombineFwdSlash(AssetsFilename));
-                                        outputStream.CopyTo(writeStream);
-                                        writeStream.Close();
+                                        outputStream.Seek(0, SeekOrigin.Begin);
+                                        var bts = outputStream.ReadBytes((int)outputStream.Length);
+                                        FileProvider.Write(AssetsRootPath.CombineFwdSlash(AssetsFilename), bts);
                                     }
                                 }
                                 FileProvider.Save();

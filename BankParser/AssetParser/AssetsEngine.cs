@@ -91,9 +91,9 @@ namespace AssetParser
                     _manager.WriteAllOpenAssets();
                     sw.Stop();
                     Log.LogMsg($"Serialization of assets took {sw.ElapsedMilliseconds}ms");
-
-                    Log.LogMsg("Making sure everything is saved...");
-                    FileProvider.Save();
+                    // We already call FileProvider.Save since this is an asset bundle!
+                    //Log.LogMsg("Making sure everything is saved...");
+                    //FileProvider.Save();
                 }
                 catch (Exception ex)
                 {
