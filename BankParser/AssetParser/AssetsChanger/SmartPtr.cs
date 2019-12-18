@@ -34,9 +34,10 @@ namespace AssetParser.AssetsChanger
         {
             get
             {
-                if (isNull || Target == null || Target.Object == null || Target.Object as IHaveName == null) return "";
+                if (isNull || Target == null) return "";
                 try
                 {
+                    if (Target.Object == null || Target.Object as IHaveName == null) return "NAME_UNKNOWN! CLASSID: " + Target.Type.ClassID;
                     return (Target.Object as IHaveName).Name;
                 }
                 catch (Exception)
@@ -49,9 +50,10 @@ namespace AssetParser.AssetsChanger
         {
             get
             {
-                if (isNull || Target == null || Target.Object == null) return "";
+                if (isNull || Target == null) return "";
                 try
                 {
+                    if (Target.Object == null) return "";
                     return Target.Object.GetType().Name;
                 }
                 catch (Exception)

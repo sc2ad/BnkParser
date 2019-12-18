@@ -1,4 +1,4 @@
-﻿using AssetParser.AssetsChanger;
+using AssetParser.AssetsChanger;
 using AssetParser.AssetsChanger.Assets;
 using Newtonsoft.Json;
 using System;
@@ -21,6 +21,10 @@ namespace AssetParser.PistolWhipAssets
 
         public BaseType(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("BaseType"))
         { }
+
+        public BaseType(AssetsFile assetsFile, MonoScriptObject scriptObject) : base(assetsFile, scriptObject)
+        {
+        }
 
         public override void ParseObject(AssetsReader reader)
         {

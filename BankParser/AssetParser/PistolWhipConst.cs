@@ -24,6 +24,7 @@ namespace AssetParser
             scriptHashToTypes.Add("Enemy", typeof(Enemy));
             scriptHashToTypes.Add("EnemyAction", typeof(EnemyAction));
             scriptHashToTypes.Add("EnemySequence", typeof(EnemySequence));
+            scriptHashToTypes.Add("Event", typeof(Event));
             scriptHashToTypes.Add("FloatPayload", typeof(FloatPayload));
             scriptHashToTypes.Add("GameMap", typeof(GameMap));
             scriptHashToTypes.Add("GeoSet", typeof(GeoSet));

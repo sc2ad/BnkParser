@@ -149,6 +149,7 @@
     <Compile Include="PistolWhipAssets\EnemyAction.cs" />
     <Compile Include="PistolWhipAssets\EnemyMovement.cs" />
     <Compile Include="PistolWhipAssets\EnemySequence.cs" />
+    <Compile Include="PistolWhipAssets\Event.cs" />
     <Compile Include="PistolWhipAssets\FloatPayload.cs" />
     <Compile Include="PistolWhipAssets\GameMap.cs" />
     <Compile Include="PistolWhipAssets\GeoSet.cs" />

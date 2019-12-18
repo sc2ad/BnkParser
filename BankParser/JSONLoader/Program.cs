@@ -39,33 +39,7 @@ namespace JSONLoader
             else
                 Console.WriteLine($"{fd.Name}: Object null!");
         }
-        private class MyContractResolver : DefaultContractResolver
-        {
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-            {
-                var list = base.CreateProperties(type, memberSerialization);
-                
-                Type t = type;
-                var types = new List<Type>();
-                while (t != null)
-                {
-                    types.Add(t);
-                    t = t.BaseType;
-                } 
-                foreach (var prop in list)
-                {
-                    if (types.Contains(prop.DeclaringType))
-                    {
-                        var ca = type.GetProperty(prop.PropertyName).GetCustomAttribute<JsonIgnoreAttribute>(true);
-                        if (ca == null)
-                            prop.Ignored = false; // Only public and non-ignored properties are taken
-                    }
-                }
-
-                return list;
-            }
-        }
-        static void DumpAll<T>(System.Collections.Generic.IEnumerable<IObjectInfo<T>> arr) where T : MonoBehaviourObject
+        static void DumpAll<T>(System.Collections.Generic.IEnumerable<IObjectInfo<T>> arr, Formatting format) where T : MonoBehaviourObject
         {
             bool rawFields = false;
             string name = typeof(T).Name;
@@ -93,7 +67,7 @@ namespace JSONLoader
             }
             foreach (var l in arr)
             {
-                string json = JsonConvert.SerializeObject(l.Object, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(l.Object, format);
                 //    new JsonSerializerSettings()
                 //{
                 //    ContractResolver = new MyContractResolver()
@@ -144,7 +118,7 @@ namespace JSONLoader
             { "Koreography", typeof(Koreography) },
             { "TrackData", typeof(TrackData) },
             { "MeshObject", typeof(MeshObject) },
-            //{ "GeoSet", typeof(GeoSet) },
+            { "GeoSet", typeof(GeoSet) },
             { "LevelDatabase", typeof(LevelDatabase) },
             { "LevelAssetDatabase", typeof(LevelAssetDatabase) },
             { "WwiseStateReference", typeof(WwiseStateReference) }
@@ -152,24 +126,34 @@ namespace JSONLoader
         private static void DumpKnowns()
         {
             Console.WriteLine("Finding assets...");
-
-            var lds = Engine.Manager.MassFindAssets<LevelData>((oi) => true, false);
-            var kors = Engine.Manager.MassFindAssets<Koreography>((oi) => true, false);
-            var tds = Engine.Manager.MassFindAssets<TrackData>((oi) => true, false);
+            // TODO: Dump like this, make overload to MassFindAssets that takes in a type
+            //foreach (var k in KnownTypes.Keys)
+            //{
+            //    Engine.Manager.MassFindAssets
+            //}
+            //var lds = Engine.Manager.MassFindAssets<LevelData>((oi) => true, false);
+            //var kors = Engine.Manager.MassFindAssets<Koreography>((oi) => true, false);
+            //var tds = Engine.Manager.MassFindAssets<TrackData>((oi) => true, false);
             //var gs = Engine.Manager.MassFindAssets<GeoSet>((oi) => true, false);
-            var ldb = Engine.Manager.MassFindAssets<LevelDatabase>((oi) => true, false);
-            var ladb = Engine.Manager.MassFindAssets<LevelAssetDatabase>((oi) => true, false);
-            var wwsrs = Engine.Manager.MassFindAssets<WwiseStateReference>((oi) => true, false);
+            //var ldb = Engine.Manager.MassFindAssets<LevelDatabase>((oi) => true, false);
+            //var ladb = Engine.Manager.MassFindAssets<LevelAssetDatabase>((oi) => true, false);
+            //var wwsrs = Engine.Manager.MassFindAssets<WwiseStateReference>((oi) => true, false);
+            var enemies = Engine.Manager.MassFindAssets<Enemy>((oi) => true, false);
+            var enemySequences = Engine.Manager.MassFindAssets<EnemySequence>((oi) => true, false);
+            var enemyActions = Engine.Manager.MassFindAssets<EnemyAction>((oi) => true, false);
             Console.WriteLine("All assets found!");
             CreateDataDirs();
             Console.WriteLine("Beginning Dump...");
-            DumpAll(lds);
-            DumpAll(kors);
-            DumpAll(tds);
-            //DumpAll(gs);
-            DumpAll(ldb);
-            DumpAll(ladb);
-            DumpAll(wwsrs);
+            //DumpAll(lds, Formatting.Indented);
+            //DumpAll(kors, Formatting.Indented);
+            //DumpAll(tds, Formatting.Indented);
+            //DumpAll(gs, Formatting.Indented);
+            //DumpAll(ldb, Formatting.Indented);
+            //DumpAll(ladb, Formatting.Indented);
+            //DumpAll(wwsrs, Formatting.Indented);
+            DumpAll(enemies, Formatting.Indented);
+            DumpAll(enemySequences, Formatting.Indented);
+            DumpAll(enemyActions, Formatting.Indented);
             Console.WriteLine("Success!");
         }
         #endregion
@@ -225,7 +209,7 @@ namespace JSONLoader
                 }
             }
             asset.GetType().GetProperty("DataOffset").SetValue(asset, -1);
-            asset.GetType().GetProperty("DataSize").SetValue(asset, -1);
+            //asset.GetType().GetProperty("DataSize").SetValue(asset, -1);
         }
         private static void LoadDumps()
         {

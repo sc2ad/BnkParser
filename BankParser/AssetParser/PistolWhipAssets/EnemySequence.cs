@@ -14,7 +14,8 @@ namespace AssetParser.PistolWhipAssets
     {
         public EnemyToughness enemyType { get; set; }
         public SmartPtr<GameObject> actionHolder { get; set; }
-        public List<SmartPtr<EnemyAction>> actions { get; set; }
+        // Actually of type EnemyAction
+        public List<SmartPtr<MonoBehaviourObject>> actions { get; set; }
         public Single playerActionLerp { get; set; }
         public WorldPoint localActionPoint { get; set; }
         public bool autospawn { get; set; }
@@ -36,7 +37,7 @@ namespace AssetParser.PistolWhipAssets
         {
             enemyType = reader.ReadEnum<EnemyToughness>();
             actionHolder = SmartPtr<GameObject>.Read(ObjectInfo.ParentFile, this, reader);
-            actions = reader.ReadArrayOf((r) => SmartPtr<EnemyAction>.Read(ObjectInfo.ParentFile, this, r));
+            actions = reader.ReadArrayOf((r) => SmartPtr<MonoBehaviourObject>.Read(ObjectInfo.ParentFile, this, r));
             playerActionLerp = reader.ReadSingle();
             localActionPoint = new WorldPoint(reader);
             autospawn = reader.ReadBoolean();
