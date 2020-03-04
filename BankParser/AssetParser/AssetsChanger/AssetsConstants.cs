@@ -19,9 +19,12 @@ namespace AssetParser.AssetsChanger.AssetsConstants
         public const int MeshFilterClassID = 33;
         public const int TransformClassID = 4;
         public const int RectTransformClassID = 224;
-        public const int AnimationClassID = 111;
+        //public const int AnimationClassID = 111;
         public const int SkinnedMeshRenderer = 137;
         public const int MaterialClassID = 21;
         public const int MeshRendererClassID = 23;
+        public const int BoxColliderClassID = 0x41;
+        public const int PhysicMaterialClassID = 0x86;
+        public const int ColliderClassID = -1; // UNUSED
     }
 }

@@ -50,7 +50,7 @@ namespace AssetParser.AssetsChanger.Assets
         protected override void WriteBase(AssetsWriter writer)
         {
             base.WriteBase(writer);
-            this.GameObject.Write(writer);
+            GameObject.Write(writer);
         }
 
         [JsonIgnore]

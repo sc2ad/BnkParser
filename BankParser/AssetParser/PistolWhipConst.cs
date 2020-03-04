@@ -16,6 +16,7 @@ namespace AssetParser
             scriptHashToTypes.Add("AssetPayload", typeof(AssetPayload));
             scriptHashToTypes.Add("BaseType", typeof(BaseType));
             scriptHashToTypes.Add("BeatData", typeof(BeatData));
+            scriptHashToTypes.Add("BodyPart", typeof(BodyPart));
             scriptHashToTypes.Add("ColorPayload", typeof(ColorPayload));
             scriptHashToTypes.Add("CullingRange", typeof(CullingRange));
             scriptHashToTypes.Add("CurvePayload", typeof(CurvePayload));
@@ -23,6 +24,16 @@ namespace AssetParser
             scriptHashToTypes.Add("DecorationSet", typeof(DecorationSet));
             scriptHashToTypes.Add("Enemy", typeof(Enemy));
             scriptHashToTypes.Add("EnemyAction", typeof(EnemyAction));
+            scriptHashToTypes.Add("EnemyActionAimAndFire", typeof(EnemyActionAndFire));
+            scriptHashToTypes.Add("EnemyActionAimEnd", typeof(EnemyActionAimEnd));
+            scriptHashToTypes.Add("EnemyActionAimStart", typeof(EnemyActionAimStart));
+            scriptHashToTypes.Add("EnemyActionFire", typeof(EnemyActionFire));
+            scriptHashToTypes.Add("EnemyActionInstant", typeof(EnemyActionInstant));
+            scriptHashToTypes.Add("EnemyActionMove", typeof(EnemyActionMove));
+            scriptHashToTypes.Add("EnemyActionRootMotion", typeof(EnemyActionRootMotion));
+            scriptHashToTypes.Add("EnemyActionStopFiring", typeof(EnemyActionStopFiring));
+            scriptHashToTypes.Add("EnemyActionWait", typeof(EnemyActionWait));
+            scriptHashToTypes.Add("EnemyDatabase", typeof(EnemyDatabase));
             scriptHashToTypes.Add("EnemySequence", typeof(EnemySequence));
             scriptHashToTypes.Add("Event", typeof(Event));
             scriptHashToTypes.Add("FloatPayload", typeof(FloatPayload));
@@ -40,9 +51,12 @@ namespace AssetParser
             scriptHashToTypes.Add("LevelData", typeof(LevelData));
             scriptHashToTypes.Add("LevelDatabase", typeof(LevelDatabase));
             scriptHashToTypes.Add("LevelDecoratorBase", typeof(LevelDecoratorBase));
-            scriptHashToTypes.Add("SongPanelUIController", typeof(SongPanelUIController));
+            scriptHashToTypes.Add("MeleeBodyPart", typeof(MeleeBodyPart));
             scriptHashToTypes.Add("ObstacleData", typeof(ObstacleData));
+            scriptHashToTypes.Add("PlayerKiller", typeof(PlayerKiller));
+            scriptHashToTypes.Add("SongPanelUIController", typeof(SongPanelUIController));
             scriptHashToTypes.Add("SpectrumPayload", typeof(SpectrumPayload));
+            scriptHashToTypes.Add("TargetableObject", typeof(TargetableObject));
             scriptHashToTypes.Add("TargetData", typeof(TargetData));
             scriptHashToTypes.Add("TempoSectionDef", typeof(TempoSectionDef));
             scriptHashToTypes.Add("TextPayload", typeof(TextPayload));
@@ -51,6 +65,7 @@ namespace AssetParser
             scriptHashToTypes.Add("WallDecorator", typeof(WallDecorator));
             scriptHashToTypes.Add("WorldObject", typeof(WorldObject));
             scriptHashToTypes.Add("WorldRegion", typeof(WorldRegion));
+            scriptHashToTypes.Add("WwiseEventReference", typeof(WwiseEventReference));
             scriptHashToTypes.Add("WwiseGroupValueObjectReference", typeof(WwiseGroupValueObjectReference));
             scriptHashToTypes.Add("WwiseKoreographySet", typeof(WwiseKoreographySet));
             scriptHashToTypes.Add("WwiseKoreoMediaIDEntry", typeof(WwiseKoreoMediaIDEntry));

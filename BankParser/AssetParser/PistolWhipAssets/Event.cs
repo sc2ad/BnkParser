@@ -11,7 +11,8 @@ namespace AssetParser.PistolWhipAssets
 {
     public class Event : BaseType
     {
-        public SmartPtr<WwiseObjectReference> wwiseObjectReference { get; set; }
+        // Enemy: 0x74
+        public SmartPtr<WwiseObjectReference> WwiseObjectReference { get; set; }
         [JsonConstructor]
         public Event() { }
         public Event(IObjectInfo<AssetsObject> objectInfo, AssetsReader reader, bool parseLiteral = false) : base(objectInfo, reader, parseLiteral)
@@ -24,13 +25,13 @@ namespace AssetParser.PistolWhipAssets
         public override void ParseObject(AssetsReader reader)
         {
             base.ParseObject(reader);
-            wwiseObjectReference = SmartPtr<WwiseObjectReference>.Read(ObjectInfo.ParentFile, this, reader);
+            WwiseObjectReference = SmartPtr<WwiseObjectReference>.Read(ObjectInfo.ParentFile, this, reader);
         }
 
         protected override void WriteObject(AssetsWriter writer)
         {
             base.WriteObject(writer);
-            wwiseObjectReference.WritePtr(writer);
+            WwiseObjectReference.WritePtr(writer);
         }
     }
 }

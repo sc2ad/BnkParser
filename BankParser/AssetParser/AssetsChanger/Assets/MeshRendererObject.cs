@@ -8,7 +8,7 @@ namespace AssetParser.AssetsChanger.Assets
 {
     public sealed class MeshRendererObject : Renderer
     {
-        public MeshRendererObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.MeshFilterClassID)
+        public MeshRendererObject(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.MeshRendererClassID)
         {
         }
 

@@ -72,11 +72,24 @@ namespace JSONLoader
                 //{
                 //    ContractResolver = new MyContractResolver()
                 //});
-                File.WriteAllText(Path.Combine($"dumps/{name}", l.Object.Name + $"_{name}.json"), json);
+                string path = Path.Combine($"dumps/{name}", l.Object.Name + $"_{name}.json");
+                int i = 1;
+                while (File.Exists(path))
+                {
+                    path = Path.Combine($"dumps/{name}", l.Object.Name + $"{i}_{name}.json");
+                    i++;
+                }
+                File.WriteAllText(path, json);
                 if (rawFields)
                 {
                     byte[] bts = (byte[])l.Object.GetType().GetProperty("sectionData").GetValue(l.Object, new object[0]);
-                    File.WriteAllBytes(Path.Combine($"dumps/{name}", l.Object.Name + $"_{name}_SectionData.dat"), bts);
+                    path = Path.Combine($"dumps/{name}", l.Object.Name + $"_{name}_SectionData.dat");
+                    if (File.Exists(path))
+                    {
+                        // Should always map to the same i
+                        path = Path.Combine($"dumps/{name}", l.Object.Name + $"{i}_{name}.json");
+                    }
+                    File.WriteAllBytes(path, bts);
                 }
                 DumpRaw(l, name);
             }
@@ -154,6 +167,16 @@ namespace JSONLoader
             DumpAll(enemies, Formatting.Indented);
             DumpAll(enemySequences, Formatting.Indented);
             DumpAll(enemyActions, Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionAimEnd>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionAimStart>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionAndFire>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionFire>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionInstant>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionMove>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionRootMotion>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionStopFiring>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyActionWait>((oi) => true, false), Formatting.Indented);
+            DumpAll(Engine.Manager.MassFindAssets<EnemyDatabase>((oi) => true, false), Formatting.Indented);
             Console.WriteLine("Success!");
         }
         #endregion

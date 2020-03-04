@@ -43,7 +43,8 @@ namespace AssetParser.AssetsChanger
             ObjectDataOffset = reader.ReadBEInt32();
             IsBigEndian = reader.ReadBoolean();
             //padding apparently
-            reader.ReadBytes(3);
+            //reader.ReadBytes(3);
+            reader.AlignTo(4);
         }
 
         public void Write(AssetsWriter writer)
@@ -53,7 +54,8 @@ namespace AssetParser.AssetsChanger
             writer.WriteBEInt32(Version);
             writer.WriteBEInt32(ObjectDataOffset);
             writer.Write(IsBigEndian);
-            writer.Write(new byte[3]);
+            writer.AlignTo(4);
+            //writer.Write(new byte[3]);
         }
 
     }

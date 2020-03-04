@@ -11,9 +11,13 @@ namespace AssetParser.PistolWhipAssets
 {
     public class AnimationCurve
     {
+        // Enemy: 0xC8
         public List<Keyframe> keys { get; set; }
+        // Enemy: 0x104
         public int length { get; set; }
+        // Enemy: 0x108
         public WrapMode preWrapMode { get; set; }
+        // Enemy: 0x10C
         public WrapMode postWrapMode { get; set; }
 
         //public AnimationCurve(AssetsFile assetsFile) : base(assetsFile, AssetsConstants.ClassID.MeshAssetClassID)

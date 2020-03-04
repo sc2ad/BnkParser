@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AssetParser.PistolWhipAssets
 {
-    public sealed class EnemyAction : MonoBehaviourObject, INeedAssetsMetadata
+    public class EnemyAction : MonoBehaviourObject, INeedAssetsMetadata
     {
         public Single duration { get; set; }
         public WorldPoint localStartingPoint { get; set; }
@@ -24,6 +24,8 @@ namespace AssetParser.PistolWhipAssets
         }
 
         public EnemyAction(AssetsFile assetsFile) : base(assetsFile, assetsFile.Manager.GetScriptObject("EnemyAction"))
+        { }
+        public EnemyAction(AssetsFile assetsFile, MonoScriptObject o) : base(assetsFile, o)
         { }
 
         public override void ParseObject(AssetsReader reader)

@@ -11,7 +11,9 @@ namespace AssetParser.PistolWhipAssets
 {
     public class BaseType : MonoBehaviourObject
     {
+        // Enemy: 0x6C
         public int idInternal { get; set; }
+        // Enemy: 0x70
         public byte[] valueGuidInternal { get; set; }
         [JsonConstructor]
         public BaseType() { }

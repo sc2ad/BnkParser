@@ -94,7 +94,9 @@
     <Compile Include="AssetsChanger\Assets\AABB.cs" />
     <Compile Include="AssetsChanger\Assets\AudioClipObject.cs" />
     <Compile Include="AssetsChanger\Assets\BlendShapeData.cs" />
+    <Compile Include="AssetsChanger\Assets\BoxCollider.cs" />
     <Compile Include="AssetsChanger\Assets\Channel.cs" />
+    <Compile Include="AssetsChanger\Assets\Collider.cs" />
     <Compile Include="AssetsChanger\Assets\Color.cs" />
     <Compile Include="AssetsChanger\Assets\Component.cs" />
     <Compile Include="AssetsChanger\Assets\CompressedMesh.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="AssetsChanger\Assets\GLTextureSettings.cs" />
     <Compile Include="AssetsChanger\Assets\Keyframe.cs" />
     <Compile Include="AssetsChanger\Assets\MaterialObject.cs" />
+    <Compile Include="AssetsChanger\Assets\MeshFilter.cs" />
     <Compile Include="AssetsChanger\Assets\MeshObject.cs" />
     <Compile Include="AssetsChanger\Assets\MeshRendererObject.cs" />
     <Compile Include="AssetsChanger\Assets\MiscPointClasses.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="AssetsChanger\Assets\MonoScript.cs" />
     <Compile Include="AssetsChanger\Assets\PackedIntVector.cs" />
     <Compile Include="AssetsChanger\Assets\PackedSingleVector.cs" />
+    <Compile Include="AssetsChanger\Assets\PhysicMaterial.cs" />
     <Compile Include="AssetsChanger\Assets\ProperySheet.cs" />
     <Compile Include="AssetsChanger\Assets\RectF.cs" />
     <Compile Include="AssetsChanger\Assets\RectTransform.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="PistolWhipAssets\AlbumArtDatabase.cs" />
     <Compile Include="PistolWhipAssets\AssetPayload.cs" />
     <Compile Include="PistolWhipAssets\BaseType.cs" />
+    <Compile Include="PistolWhipAssets\BodyPart.cs" />
     <Compile Include="PistolWhipAssets\ChunkMeshData.cs" />
     <Compile Include="PistolWhipAssets\ChunkMeshSlice.cs" />
     <Compile Include="PistolWhipAssets\ColorPayload.cs" />
@@ -147,6 +152,17 @@
     <Compile Include="PistolWhipAssets\DecorationSet.cs" />
     <Compile Include="PistolWhipAssets\Enemy.cs" />
     <Compile Include="PistolWhipAssets\EnemyAction.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionAimAndFire.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionAimEnd.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionAimStart.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionFire.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionInstant.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionMove.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionRootMotion.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionStopFiring.cs" />
+    <Compile Include="PistolWhipAssets\EnemyActionWait.cs" />
+    <Compile Include="PistolWhipAssets\EnemyDatabase.cs" />
+    <Compile Include="PistolWhipAssets\EnemyHitEffect.cs" />
     <Compile Include="PistolWhipAssets\EnemyMovement.cs" />
     <Compile Include="PistolWhipAssets\EnemySequence.cs" />
     <Compile Include="PistolWhipAssets\Event.cs" />
@@ -163,9 +179,12 @@
     <Compile Include="AssetsChanger\Assets\Renderer.cs" />
     <Compile Include="PistolWhipAssets\LevelDatabase.cs" />
     <Compile Include="PistolWhipAssets\LevelDecoratorBase.cs" />
+    <Compile Include="PistolWhipAssets\MeleeBodyPart.cs" />
     <Compile Include="PistolWhipAssets\OscillatingObjectData.cs" />
+    <Compile Include="PistolWhipAssets\PlayerKiller.cs" />
     <Compile Include="PistolWhipAssets\SongPanelUIController.cs" />
     <Compile Include="PistolWhipAssets\SpectrumPayload.cs" />
+    <Compile Include="PistolWhipAssets\TargetableObject.cs" />
     <Compile Include="PistolWhipAssets\TargetData.cs" />
     <Compile Include="BundleFileProvider.cs" />
     <Compile Include="PistolWhipAssets\BeatData.cs" />
@@ -181,6 +200,7 @@
     <Compile Include="PistolWhipAssets\WorldObject.cs" />
     <Compile Include="PistolWhipAssets\WorldPoint.cs" />
     <Compile Include="PistolWhipAssets\WorldRegion.cs" />
+    <Compile Include="PistolWhipAssets\WwiseEventReference.cs" />
     <Compile Include="PistolWhipAssets\WwiseGroupValueObjectReference.cs" />
     <Compile Include="PistolWhipAssets\WwiseKoreographySet.cs" />
     <Compile Include="PistolWhipAssets\WwiseKoreoMediaIDEntry.cs" />

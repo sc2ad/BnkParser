@@ -10,7 +10,9 @@ namespace AssetParser.PistolWhipAssets
 {
     public class EnemyMovement
     {
+        // Enemy: 0x120
         public Single walk { get; set; }
+        // Enemy: 0x124
         public Single run { get; set; }
         [JsonConstructor]
         public EnemyMovement()

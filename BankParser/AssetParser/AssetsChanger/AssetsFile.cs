@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -212,6 +213,9 @@ namespace AssetParser.AssetsChanger
                             int ctr = 0;
                             foreach (var obj in Metadata.ObjectInfos)
                             {
+                                if (obj.IsNew)
+                                    // Object is new here
+                                    Console.WriteLine("Writing New object!");
                                 ctr++;
                                 var offset = (int)objectsMS.Position;
                                 obj.GetObjectForWrite().Write(writer);
@@ -219,14 +223,20 @@ namespace AssetParser.AssetsChanger
                                 obj.DataOffset = offset;
                                 var origSize = obj.DataSize;
                                 obj.DataSize = (int)(objectsMS.Position - obj.DataOffset);
+                                if (origSize != obj.DataSize)
+                                {
+                                    // TEMPORARY! MUST REMOVE!
+                                    Console.WriteLine("MISMATCH!");
+                                }
                                 writer.AlignTo(8);
                             }
                         }
                         using (AssetsWriter writer = new AssetsWriter(metaMS))
                         {
+                            // This is fine!
                             Metadata.Write(writer);
                         }
-
+                        // objectMS is 8 bytes smaller than it should be here
                         Header.FileSize = Header.HeaderSize + (int)objectsMS.Length + (int)metaMS.Length;
                         Header.ObjectDataOffset = Header.HeaderSize + (int)metaMS.Length;
 
@@ -249,7 +259,7 @@ namespace AssetParser.AssetsChanger
                             Header.ObjectDataOffset += diff;
                             Header.FileSize += diff;
                         }
-
+                        // According to parse, MetadataSize shrunk by 4
                         Header.MetadataSize = (int)metaMS.Length;
                         objectsMS.Seek(0, SeekOrigin.Begin);
                         metaMS.Seek(0, SeekOrigin.Begin);
@@ -395,7 +405,7 @@ namespace AssetParser.AssetsChanger
             return Metadata.ObjectInfos.Where(x => x is ObjectInfo<T> && x.ObjectID == objectID).Cast<ObjectInfo<T>>().FirstOrDefault()?.Object;
         }
 
-        public IObjectInfo<T> GetObjectInfo<T>(int fileID, Int64 pathID)
+        public dynamic GetObjectInfo<T>(int fileID, Int64 pathID)
         {
             if (fileID == 0)
             {
@@ -406,9 +416,16 @@ namespace AssetParser.AssetsChanger
                     return null;
                     //throw new Exception($"Object info could not be found for path id {pathID} in file {AssetsFileName}");
                 }
+
                 var objTypedInfo = objInfo as IObjectInfo<T>;
                 if (objTypedInfo == null)
-                    throw new Exception($"Object was the wrong type!  Pointer expected {typeof(T).Name}, target was actually {(objInfo.GetType().GenericTypeArguments[0]?.Name)}");
+                {
+                    // Lets try to check all the children of type T, maybe it matches one of those?
+                    if (typeof(T).IsAssignableFrom(objInfo.GetType().GenericTypeArguments[0]) == true)
+                        return objTypedInfo;
+                }
+                if (objTypedInfo == null)
+                    throw new Exception($"Object was the wrong type! Pointer at: ({fileID}, {pathID}) expected {typeof(T).Name}, target was actually {objInfo.GetType().GenericTypeArguments[0]?.Name}");
                 return objTypedInfo;
             }
             else

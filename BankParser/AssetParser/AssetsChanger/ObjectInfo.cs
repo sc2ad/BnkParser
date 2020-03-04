@@ -153,6 +153,9 @@ namespace AssetParser.AssetsChanger.Assets
             var objectType = assetsFile.Metadata.Types[typeIndex];
             switch (objectType.ClassID)
             {
+                case AssetsConstants.ClassID.MonoScriptType:
+                    type = typeof(MonoScriptObject);
+                    break;
                 case AssetsConstants.ClassID.MonoBehaviourScriptType:
                     var found = assetsFile.Manager.GetScriptObject(objectType.TypeHash);
 
@@ -176,17 +179,8 @@ namespace AssetParser.AssetsChanger.Assets
                 case AssetsConstants.ClassID.Texture2DClassID:
                     type = typeof(Texture2DObject);
                     break;
-                case AssetsConstants.ClassID.MaterialClassID:
-                    type = typeof(MaterialObject);
-                    break;
-                case AssetsConstants.ClassID.MeshAssetClassID:
-                    type = typeof(MeshObject);
-                    break;
-                case AssetsConstants.ClassID.MeshRendererClassID:
-                    type = typeof(MeshRendererObject);
-                    break;
-                case AssetsConstants.ClassID.SkinnedMeshRenderer:
-                    type = typeof(SkinnedMeshRenderer);
+                case AssetsConstants.ClassID.SpriteClassID:
+                    type = typeof(SpriteObject);
                     break;
                 case AssetsConstants.ClassID.GameObjectClassID:
                     type = typeof(GameObject);
@@ -194,14 +188,35 @@ namespace AssetParser.AssetsChanger.Assets
                 case AssetsConstants.ClassID.TextAssetClassID:
                     type = typeof(TextAsset);
                     break;
-                case AssetsConstants.ClassID.SpriteClassID:
-                    type = typeof(SpriteObject);
+                case AssetsConstants.ClassID.MeshAssetClassID:
+                    type = typeof(MeshObject);
                     break;
-                case AssetsConstants.ClassID.MonoScriptType:
-                    type = typeof(MonoScriptObject);
+                case AssetsConstants.ClassID.MeshFilterClassID:
+                    type = typeof(MeshFilter);
+                    break;
+                case AssetsConstants.ClassID.TransformClassID:
+                    type = typeof(Transform);
                     break;
                 case AssetsConstants.ClassID.RectTransformClassID:
                     type = typeof(RectTransform);
+                    break;
+                //case AssetsConstants.ClassID.AnimationClassID:
+                //    type = typeof(Animation);
+                //    break;
+                case AssetsConstants.ClassID.SkinnedMeshRenderer:
+                    type = typeof(SkinnedMeshRenderer);
+                    break;
+                case AssetsConstants.ClassID.MaterialClassID:
+                    type = typeof(MaterialObject);
+                    break;
+                case AssetsConstants.ClassID.MeshRendererClassID:
+                    type = typeof(MeshRendererObject);
+                    break;
+                case AssetsConstants.ClassID.BoxColliderClassID:
+                    type = typeof(BoxCollider);
+                    break;
+                case AssetsConstants.ClassID.PhysicMaterialClassID:
+                    type = typeof(PhysicMaterial);
                     break;
                 default:
                     type = typeof(AssetsObject);
